@@ -29,10 +29,27 @@ window.onload = function(){
 	var examObj1 = document.getElementsByClassName('exam_wrap')[0];
 	examObj1.getElementsByTagName('button')[0].onclick = function(){
 		var examChild = examObj1.getElementsByClassName('exam_q')[0].querySelectorAll('*');
-		for(var i = 0; i < examChild.length; i++){
-			examChild[i].style.backgroundColor = 'yellow';
-		}
+		for(var i = 0; i < examChild.length; i++) examChild[i].style.backgroundColor = 'yellow';
 	};
+
+	var examObj2 = document.getElementsByClassName('exam_wrap')[1];
+	examObj2.getElementsByTagName('button')[0].onclick = function(){
+		var examChild = examObj2.getElementsByClassName('exam_q')[0].querySelectorAll('span');
+		for(var i = 0; i < examChild.length; i++) examChild[i].style.backgroundColor = 'yellow';
+	};
+
+	var examObj3 = document.getElementsByClassName('exam_wrap')[2];
+	examObj3.getElementsByTagName('button')[0].onclick = function(){
+		var examChild = examObj3.getElementsByClassName('exam_q')[0].querySelectorAll('em span');
+		for(var i = 0; i < examChild.length; i++) examChild[i].style.backgroundColor = 'yellow';
+	}
+
+	var examObj4 = document.getElementsByClassName('exam_wrap')[3];
+	examObj4.getElementsByTagName('button')[0].onclick = function(){
+		var examChild = examObj4.getElementsByClassName('exam_q')[0].childNodes;
+		console.log(examChild);
+		for(var i = 0; i < examChild.length; i++) examChild[i].style.backgroundColor = 'yellow';
+	}
 }
 </script>
 </head>
