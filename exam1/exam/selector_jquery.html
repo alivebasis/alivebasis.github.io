@@ -1,56 +1,53 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
 <title>exam</title>
 <link rel="stylesheet" href="common.css" />
-<!-- <script src="http://code.jquery.com/jquery-latest.js"></script> jQuery library-->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-// jQuery default
-// $(document).ready(function(){
+$(function(){
+	var examObj1 = $('.exam_wrap:eq(0)');
+	examObj1.find('button').on('click', function(){
+		examObj1.find('.exam_q *').css('background','yellow');
+	});
 
-// });
-// $(function(){
+	var examObj2 = $('.exam_wrap:eq(1)');
+	examObj2.find('button').on('click', function(){
+		examObj2.find('.exam_q span').css('background','yellow');
+	});
 
-// });
+	var examObj3 = $('.exam_wrap:eq(2)');
+	examObj3.find('button').on('click', function(){
+		examObj3.find('.exam_q em span').css('background','yellow');
+	});
 
+	var examObj4 = $('.exam_wrap:eq(3)');
+	examObj4.find('button').on('click', function(){
+		examObj4.find('.exam_q > span').css('background','yellow');
+	});
 
-// jQuery code
-// $(function(){
-// 	var examObj1 = $('.exam_wrap:eq(0)');
-// 	examObj1.find('button').on('click', function(){
-// 		examObj1.find('.exam_q *').css('background','yellow');
-// 	});
-// });
+	var examObj5 = $('.exam_wrap:eq(4)');
+	examObj5.find('button').on('click', function(){
+		examObj5.find('.exam_q div + p').css('background','yellow');
+	});
 
-// javascript code
-window.onload = function(){
-	var examObj1 = document.getElementsByClassName('exam_wrap')[0];
-	examObj1.getElementsByTagName('button')[0].onclick = function(){
-		var examChild = examObj1.getElementsByClassName('exam_q')[0].querySelectorAll('*');
-		for(var i = 0; i < examChild.length; i++) examChild[i].style.backgroundColor = 'yellow';
-	};
+	var examObj6 = $('.exam_wrap:eq(5)');
+	examObj6.find('button').on('click', function(){
+		examObj6.find('.exam_q div ~ span').css('background','yellow');
+	});
 
-	var examObj2 = document.getElementsByClassName('exam_wrap')[1];
-	examObj2.getElementsByTagName('button')[0].onclick = function(){
-		var examChild = examObj2.getElementsByClassName('exam_q')[0].querySelectorAll('span');
-		for(var i = 0; i < examChild.length; i++) examChild[i].style.backgroundColor = 'yellow';
-	};
+	var examObj7 = $('.exam_wrap:eq(6)');
+	examObj7.find('button').on('click', function(){
+		examObj7.find('.exam_q .active').css('background','yellow');
+	});
 
-	var examObj3 = document.getElementsByClassName('exam_wrap')[2];
-	examObj3.getElementsByTagName('button')[0].onclick = function(){
-		var examChild = examObj3.getElementsByClassName('exam_q')[0].querySelectorAll('em span');
-		for(var i = 0; i < examChild.length; i++) examChild[i].style.backgroundColor = 'yellow';
-	}
+	var examObj8 = $('.exam_wrap:eq(7)');
+	examObj8.find('button').on('click', function(){
+		examObj8.find('.exam_q #active').css('background','yellow');
+	});
+});
 
-	var examObj4 = document.getElementsByClassName('exam_wrap')[3];
-	examObj4.getElementsByTagName('button')[0].onclick = function(){
-		var examChild = examObj4.getElementsByClassName('exam_q')[0].childNodes;
-		console.log(examChild);
-		for(var i = 0; i < examChild.length; i++) examChild[i].style.backgroundColor = 'yellow';
-	}
-}
 </script>
 </head>
 <body>

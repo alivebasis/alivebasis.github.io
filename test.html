@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>테스트</title>
+</head>
+<body>
+
+<script>
+var name = '이재근';
+console.log(name);
+
+var myAge = 10;
+console.log("myAge : " + myAge);
+
+myFunc();
+myFunc2();
+
+function myFunc(){
+	var temp = 10;
+	total = temp + 20;
+	console.log("temp : " + temp);
+	console.log("total : " + total);
+}
+
+function myFunc2(){
+	var temp = 20;
+	console.log("temp : " + temp);
+}
+
+//데이터타입
+var intNum = 34;
+var singleStr = 'Volvo XC60';
+var boolVar = true;
+var emptyVar; //undefined
+var nullAvr = null; //object
+
+console.log(typeof intNum, typeof singleStr, typeof boolVar, typeof emptyVar, typeof nullAvr);
+
+//참조타입
+var objA = {
+	val : 40
+}
+console.log(objA.val);
+var objB = objA;
+console.log(objB.val);
+
+objB.val = 50;
+console.log(objA.val);
+console.log(objB.val);
+
+</script>
+</body>
+</html>
