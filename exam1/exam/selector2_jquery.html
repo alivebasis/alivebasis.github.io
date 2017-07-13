@@ -120,7 +120,7 @@ $(function(){
 
 	var examObj1 = $('.exam_wrap:eq(0)');
 	examObj1.find('button').on('click', function(){
-		examObj1.find('.exam_q').first().css('background','yellow');
+		examObj1.find('.exam_q *').first().css('background','yellow');
 	});
 
 	var examObj2 = $('.exam_wrap:eq(1)');
