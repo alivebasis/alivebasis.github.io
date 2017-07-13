@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>exam</title>
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrapper">
+	<!-- header [s] -->
+	<div id="header">
+	</div>
+	<!-- header [e] -->
+	<hr />
+	<!-- container [s] -->
+	<div id="container">
+
+	</div>
+	<!-- container [e] -->
+	<hr />
+	<!-- footer [s] -->
+	<div id="footer">
+	</div>
+	<!-- footer [e] -->
+</div>
+<!-- wrapper [e] -->
+
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+$(function(){
+	var foo = {
+		name : 'foo', //property
+		age : 40
+	}
+	console.log(foo);
+	console.log(foo.name);
+	console.log(foo.toString());
+	console.dir(Object.prototype);
+
+	console.dir(Array.prototype);
+	console.dir(Function.prototype);
+	console.dir(Number.prototype);
+	console.dir(String.prototype);
+
+	console.log(1+2);
+	console.log(1-2);
+	console.log(1*2);
+	console.log(1/2);
+	console.log(1%2);
+
+	console.log('good' + 'time');
+	console.log('good' + 3);
+	console.log(3 + 'good');
+
+	console.log(10<9);
+	console.log(10>9);
+	console.log(10<=9);
+	console.log(10>=9);
+	console.log(10==9);
+	console.log(10!=9);
+
+	var x= 12;
+	console.log(x);
+
+	var a=b=c=12;
+	console.log(a);
+	console.log(b);
+	console.log(c);
+
+	console.log(10<9 && 9<10);
+
+	var time = 0;
+	time++;
+	console.log(time);
+
+	var varia = (3<9) ? true : false;
+	console.log(varia);
+});
+
+</script>
+</body>
+</html>
