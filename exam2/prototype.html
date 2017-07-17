@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
-<title>array.html</title><link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}.CodeMirror { height: auto; }
+<title>prototype.md</title><link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}.CodeMirror { height: auto; }
 .CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; }
 .CodeMirror-lines { padding: 4px 0px; }
 .CodeMirror pre { }
@@ -317,7 +317,7 @@ header, .context-menu, .megamenu-content, footer { font-family: "Segoe UI", Aria
 </style>
 </head>
 <body class='typora-export' >
-<div  id='write'  class = 'is-node'><h2><a name='header-n42' class='md-header-anchor '></a>Array.prototype</h2><ul><li><p>Array.join() : 배열의 모든 요소를 연결해 하나의 문자열로 만듬.</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
+<div  id='write'  class = 'is-node'><h2><a name='header-n3' class='md-header-anchor '></a>Array.prototype</h2><ul><li><p>Array.join() : 배열의 모든 요소를 연결해 하나의 문자열로 만듬.</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
 var a = [&#39;바람&#39;, &#39;비&#39;, &#39;불&#39;];
 var myVar1 = a.join();      // myVar1에 &#39;바람,비,불&#39;을 대입
 var myVar2 = a.join(&#39;, &#39;);  // myVar2에 &#39;바람, 비, 불&#39;을 대입
@@ -327,33 +327,45 @@ console.log(myVar1);
 &lt;/script&gt;</pre></li><li><p>Array.reverse() : 배열의 모든 요소를 역으로 재정렬한 배열을 반환함.</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
 var a = [&#39;바람&#39;, &#39;비&#39;, &#39;불&#39;];
 var myVar1 = a.reverse();
-console.log(myVar1); // 불, 비, 바람 순서대로 출력
+console.log(myVar1); //결과: [불, 비, 바람]
+&lt;/script&gt;</pre></li><li><p>Array.sort() : 배열의 모든 요소를 정렬하여 반환함.</p><ul><li><p>default로 오름차순으로 정렬되며, ASCII 문자 순서로 정렬됨.</p><p><em>(ex: 실제로는 11 &gt; 2 이지만, 정렬 순서는 11, 2 순으로 정렬됨)</em></p></li></ul><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
+var a = [&#39;바람&#39;,&#39;비&#39;,&#39;불&#39;,&#39;치킨&#39;];
+console.log(a.sort()); //결과: [바람,불,비,치킨]
+
+var b = [9, 17, 2, 10, 3, 1];
+console.log(b.sort()); //결과: 1, 10, 17, 2, 3, 9
+
+b.sort(function(a, b){ return a - b });
+console.log(b); //결과: 1, 2, 3, 9, 10, 17
+
+b.sort(function(a, b){ return b - a });
+console.log(b); //결과: 17, 10, 9, 3, 2, 1
 &lt;/script&gt;</pre></li><li><p>Array.concat() : 인자로 들어온 배열이나 값들을, 기존 배열에 합쳐 새 배열을 반환함.</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
 var a = [&#39;바람&#39;, &#39;비&#39;, &#39;불&#39;];
 var b = [&#39;치킨&#39;, &#39;피자&#39;, &#39;족발&#39;];
 var c = [&#39;검&#39;, &#39;파&#39;, &#39;빨&#39;];
 var myVar1 = a.concat(b); // a+b
 var myVar2 = a.concat(b,c); // a+b+c
-console.log(myVar1); // 바람,비,불,치킨,피자,족발 출력
-console.log(myVar2); // 바람,비,불,치킨,피자,족발,검,파,빨 출력
-&lt;/script&gt;</pre></li><li><p>Array.slice() : 첫번째 인자의 index부터 두번째 인자(Optional) 값 번째까지에 대한 배열을 반환함.</p><p>예를 들어, Array.slice(1,4)는 <strong>2번째</strong> 요소부터 4번째 요소까지의 배열을 반환함.</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
+console.log(myVar1); //결과: [바람,비,불,치킨,피자,족발]
+console.log(myVar2); //결과: 바람,비,불,치킨,피자,족발,검,파,빨]
+&lt;/script&gt;</pre></li><li><p>Array.slice() : 첫번째 인자의 index부터 두번째 인자(Optional) 값 번째까지에 대한 배열을 반환함.</p><ul><li>예) Array.slice(1,4)는 <strong>2번째</strong> 요소부터 4번째 요소까지의 배열을 반환함.</li></ul><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
 var a = [&#39;바람&#39;, &#39;비&#39;, &#39;불&#39;,&#39;치킨&#39;, &#39;피자&#39;, &#39;족발&#39;];
 var myVar1 = a.slice(2,5);
 var myVar2 = a.slice(4);
-console.log(myVar1); // 불,치킨,피자 출력
-console.log(myVar2); // 피자,족발 출력
-&lt;/script&gt;</pre></li><li><p>Array.splice() : 배열 내 지정된 범위의 요소들을 빼서 반환함.</p><p>Array.splice(시작 index, 제거할 요소의 수(, 요소(,요소(, ...))));</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
+console.log(myVar1); //결과: [불,치킨,피자]
+console.log(myVar2); //결과: [피자,족발]
+&lt;/script&gt;</pre></li><li><p>Array.splice() : 배열 내 지정된 범위의 요소들을 빼서 반환함.</p><ul><li>Array.splice(시작 index, 제거할 요소의 수(, 요소(,요소(, ...))));</li></ul><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
 var a = [&#39;바람&#39;, &#39;비&#39;, &#39;불&#39;, &#39;눈&#39;, &#39;소나기&#39;];
 var b = a.splice(2,2,&#39;치킨&#39;,&#39;피자&#39;);
-console.log(a); // 바람,비,치킨,피자,소나기 출력
-console.log(b); // 불,눈 출력
+console.log(a); //결과: [바람,비,치킨,피자,소나기]
+console.log(b); //결과: [불,눈]
 &lt;/script&gt;</pre></li><li><p>Array.push() : 해당 배열의 끝에 요소가 추가됨.</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
 var a = [&#39;바람&#39;, &#39;비&#39;, &#39;불&#39;];
 a.push(&#39;치킨&#39;);
 console.log(a); //결과: [바람,비,불,치킨]
 a.push(&#39;피자&#39;);
 console.log(a); //결과: [바람,비,불,치킨,피자]
-&lt;/script&gt;</pre></li><li><p>Array.pop() : 해당 배열의 마지막 요소가 제거됨. <u><em>인자 넣어도 무시됨.</em></u></p><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
+&lt;/script&gt;</pre></li><li><p>Array.pop() : 해당 배열의 마지막 요소가 제거됨. <em>인자 넣어도 무시됨.</em></p><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
 var a = [&#39;바람&#39;,&#39;비&#39;,&#39;불&#39;,&#39;치킨&#39;,&#39;피자&#39;];
 a.pop();
 console.log(a); //결과: [바람,비,불,치킨]
@@ -379,6 +391,61 @@ var b = a.indexOf(&#39;치킨&#39;);
 var c = a.indexOf(&#39;피자&#39;);
 console.log(b); //결과: 3
 console.log(c); //결과: -1
-&lt;/script&gt;</pre></li></ul><p></p><h2><a name='header-n321' class='md-header-anchor '></a>String.prototype</h2><ul><li><p>String.replace() :</p><pre class='md-fences mock-cm' style='display:block;position:relative'></pre></li><li><p>String.slice() :</p><pre class='md-fences mock-cm' style='display:block;position:relative'></pre></li></ul><ul><li><p>String.split() :</p><pre class='md-fences mock-cm' style='display:block;position:relative'></pre></li><li><p>String.search() :</p><pre class='md-fences mock-cm' style='display:block;position:relative'></pre></li><li><p>String.match() :</p><pre class='md-fences mock-cm' style='display:block;position:relative'></pre></li><li><p>String.trim() :</p><pre class='md-fences mock-cm' style='display:block;position:relative'></pre></li><li><p>String.indexOf() :</p><pre class='md-fences mock-cm' style='display:block;position:relative'></pre></li></ul><p></p><h2><a name='header-n323' class='md-header-anchor '></a>Object.prototype</h2><ul><li><p>Object.hasOwnProperty() :</p><pre class='md-fences mock-cm' style='display:block;position:relative'></pre></li></ul></div>
+&lt;/script&gt;</pre></li></ul><h2><a name='header-n68' class='md-header-anchor '></a>String.prototype</h2><ul><li><p>String.replace() : 문자열 내 글자를 교체하여 새로운 문자열을 반환함.</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
+var a = &#39;Hello world!&#39;;
+console.log(a); //결과: Hello world!
+
+var b = a.replace(&#39;Hello&#39;, &#39;Goodbye&#39;);
+console.log(b); //결과: Goodbye world!
+&lt;/script&gt;</pre></li><li><p>String.slice() : 첫번째 인자의 index부터 두번째 인자(Optional) 값 번째까지에 대한 문자열을 반환함.</p><ul><li>인자값이 -1일 경우, 마지막 문자를 반환함.</li></ul><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
+var a = &#39;Hello world!&#39;;
+var b = a.slice(2, 10);
+var c = a.slice(4);
+var d = a.slice(-1);
+console.log(b); //결과: llo worl
+console.log(c); //결과: o world!
+console.log(d); //결과: !
+&lt;/script&gt;</pre></li></ul><ul><li><p>String.split() : 문자열을 인자 기준으로 분해하여 반환함.</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
+var a = &#39;How are you?&#39;;
+var b = a.split();
+var c = a.split(&#39;&#39;); 		//한글자씩 분해
+var d = a.split(&#39; &#39;);		//띄어쓰기 기준으로 분해
+var e = a.split(&#39; &#39;, 2);	//분해되는 문자열의 갯수 지정
+var f = a.split(&#39;o&#39;);		//해당 문자열을 제외하여 분해
+console.log(b); //결과: How are you?
+console.log(c); //결과: H,o,w, ,a,r,e, ,y,o,u,?
+console.log(d); //결과: How, are, you?
+console.log(e); //결과: How, are
+console.log(f); //결과: H, w are y, u?
+&lt;/script&gt;</pre></li><li><p>String.search() : 해당 문자열의 시작점을 정수값으로 반환함. (0부터 순서대로 시작)</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
+var a = &#39;How are you?&#39;;
+var b = a.search(&#39;you&#39;);
+var c = a.search(&#39;How&#39;);
+console.log(b); //결과: 8
+console.log(c); //결과: 0
+&lt;/script&gt;</pre></li><li><p>String.match() : 인자 내 정규식 패턴과 일치하는 첫 문자열과, 해당 index를 반환함.</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
+var a = &#39;How are you? you are so beautiful.&#39;;
+var b = a.match(/[a-c]/);
+console.log(b); //결과: [a, 4, How are ... beautiful]
+&lt;/script&gt;</pre></li><li><p>String.trim() : 해당 문자열의 맨앞과 맨끝의 공백을 제거하여 반환함.</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
+var a = &#39;         Hello      world   &#39;;
+var b = a.trim();
+console.log(b); //결과: Hello      world
+&lt;/script&gt;</pre></li><li><p>String.indexOf() : 해당 문자의 index를 반환함. 검색이 시작되는 index를 지정할 수 있음.</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
+var a = &#39;Hello world!&#39;;
+var b = a.indexOf(&#39;o&#39;);
+var c = a.indexOf(&#39;o&#39;, 6); //검색의 시작 index 지정 가능.
+console.log(b); //결과: 4
+console.log(c); //결과: 7
+&lt;/script&gt;</pre></li></ul><h2><a name='header-n103' class='md-header-anchor '></a>Object.prototype</h2><ul><li><p>Object.hasOwnProperty() : 객체에 해당 프로퍼티를 가지고 있는지 확인하여 boolean 값을 반환함.</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&lt;script&gt;
+var a = {
+	name : &#39;JG&#39;,
+	age : &#39;100&#39;
+}
+var b = a.hasOwnProperty(&#39;name&#39;);
+var c = a.hasOwnProperty(&#39;address&#39;);
+console.log(b); //결과: true
+console.log(c); //결과: false
+&lt;/script&gt;</pre></li></ul></div>
 </body>
 </html>
