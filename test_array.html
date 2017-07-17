@@ -8,11 +8,14 @@
 <body>
 
 <script>
-var a = ['바람','비','불','치킨'];
-var b = a.indexOf('치킨');
-var c = a.indexOf('피자')
-console.log(b); //결과: 3
-console.log(c); //결과: -1
+var a = {
+	name : 'JG',
+	age : '100'
+}
+var b = a.hasOwnProperty('name');
+var c = a.hasOwnProperty('address');
+console.log(b); //결과: 4
+console.log(c);
 </script>
 </body>
 </html>
