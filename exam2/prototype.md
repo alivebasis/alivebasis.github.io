@@ -249,8 +249,17 @@
 
 ## Object.prototype
 
-- Object.hasOwnProperty() :
+- Object.hasOwnProperty() : 객체에 해당 프로퍼티를 가지고 있는지 확인하여 boolean 값을 반환함.
 
   ```
-
+  <script>
+  var a = {
+  	name : 'JG',
+  	age : '100'
+  }
+  var b = a.hasOwnProperty('name');
+  var c = a.hasOwnProperty('address');
+  console.log(b); //결과: true
+  console.log(c); //결과: false
+  </script>
   ```
