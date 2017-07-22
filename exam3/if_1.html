@@ -7,39 +7,58 @@
 <script src="../js/jquery-1.12.4.min.js"></script>
 <script>
 $(function(){
-	var btnNext = $('.btn_next'),
-		btnPrev = $('.btn_prev'),
-		currentIdx = 0,
-		elmtLst, elmt;
+	var elmtLst,elmt,btnNext,btnPrev,currentIdx,currentIdx2;
+
+	var elmtLst1 = function(){
+		elmtLst = $('.exam_wrap').eq(0),
+		elmt = elmtLst.find('li'),
+		btnNext = elmtLst.find('button'),
+		currentIdx = 0;
+		console.log(elmtLst);
+
+		btnNext.on('click',findNextElmt);
+	};
+	elmtLst1();
+
+	var elmtLst2 = function(){
+		elmtLst = $('.exam_wrap').eq(1),
+		elmt = elmtLst.find('li'),
+		btnPrev = elmtLst.find('button'),
+		currentIdx2 = elmt.length - 1;
+		console.log(currentIdx2);
+
+		btnPrev.on('click',findPrevElmt);
+	};
+	elmtLst2();
 
 	function findPrevElmt(){
 		elmtLst = $(this).siblings('.exam_q').find('ul');
 		elmt = elmtLst.find('li');
-		if(currentIdx == 0){
-			currentIdx = elmt.length -1;
+		if(currentIdx2 == 0){
+			currentIdx2 = elmt.length -1;
 		}
 		console.log(currentIdx);
 
-		if(currentIdx > 0){
+		if(currentIdx2 > 0){
 			console.log(currentIdx);
-			setElmtColor();
-			currentIdx--;
+			setElmtColor(currentIdx2);
+			currentIdx2--;
 		}
 	}
 	function findNextElmt(){
-		elmtLst = $(this).siblings('.exam_q').find('ul');
-		elmt = elmtLst.find('li');
-
+		console.log('click');
 		if(currentIdx < elmt.length){
-			setElmtColor();
+			setElmtColor(currentIdx);
 			currentIdx++;
 		}
 	}
-	function setElmtColor(){
+	function setElmtColor(currentIdx){
 		elmt.eq(currentIdx).css('background','yellow');
 	}
-	btnPrev.on('click', findPrevElmt);
-	btnNext.on('click', findNextElmt);
+	// btnPrev.on('click', findPrevElmt);
+	// btnNext.on('click', findNextElmt);
+
+
 });
 </script>
 </head>
@@ -67,7 +86,7 @@ $(function(){
 					<li>eight</li>
 				</ul>
 			</div>
-			<button type="button" class="btn_next">다음</button>
+			<button type="button">다음</button>
 		</div>
 		<div class="exam_wrap">
 			<h1>Q. 마지막부터 역순대로 선택하세요 (style 제어)</h1>
@@ -84,6 +103,42 @@ $(function(){
 			</div>
 			<button type="button" class="btn_prev">이전</button>
 		</div>
+		<div class="exam_wrap">
+			<h1>Q. 첫번째부터 순서대로 선택하고, 전에 선택했던 Element의 배경색을 지우세요 (style 제어)</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<ul>
+					<li style="background-color:yellow">one</li>
+					<li>two</li>
+					<li>three</li>
+					<li>four</li>
+					<li>five</li>
+					<li>six</li>
+					<li>seven</li>
+					<li>eight</li>
+					<li>nine</li>
+				</ul>
+			</div>
+			<button type="button" class="btn_prev">이전</button>
+			<button type="button" class="btn_next">다음</button>
+		</div>
+        <div class="exam_wrap">
+            <h1>Q. 첫번째부터 순서대로 선택하고, 전에 선택했던 Element의 배경색을 지우시고, 무한loop 돌게 하세요 (클래스 제어)</h1>
+            <div class="exam_q"><!-- 부모 -->
+                <ul>
+                    <li class="active">one</li>
+                    <li>two</li>
+                    <li>three</li>
+                    <li>four</li>
+                    <li>five</li>
+                    <li>six</li>
+                    <li>seven</li>
+                    <li>eight</li>
+                    <li>nine</li>
+                </ul>
+            </div>
+            <button type="button" class="btn_prev">이전</button>
+            <button type="button" class="btn_next">다음</button>
+        </div>
 	</div>
 	<!-- container [e] -->
 	<hr />
