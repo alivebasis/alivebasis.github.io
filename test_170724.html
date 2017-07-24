@@ -82,17 +82,17 @@ $(function(){
 	var myObject = {
 		value : 1,
 		func1 : function(){
-			// var _this = this;
-			this.value += 1;
-			console.log(this.value); //this = myObject
+			var _this = this;
+			_this.value += 1;
+			console.log(_this.value); //this = myObject
 
 			func2 = function(){
-				this.value += 1;
-				console.log(this.value); //this = window
+				_this.value += 1;
+				console.log(_this.value); //this = window
 
 				func3 = function(){
-					this.value += 1;
-					console.log(this.value); //this = window
+					_this.value += 1;
+					console.log(_this.value); //this = window
 				}
 				func3();
 			}
