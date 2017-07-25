@@ -6,14 +6,14 @@ var obj = function (name) {
    console.log(this);
    console.log(this.name);
 };
-obj('치맥');
-new obj('피맥');
+obj('양꼬치');
+new obj('핑클');
 /*
 출력결과 :
 window{...}
-치맥
-obj{name:"피맥"}
-피맥
+양꼬치
+obj{name:"핑클"}
+핑클
 */
 ```
 
@@ -21,7 +21,6 @@ obj{name:"피맥"}
 
 - new 호출(생성자함수 호출) : this가 새로 생성되는 객체로 바인딩된다.
 
-  ​
 
 ------
 
@@ -29,13 +28,18 @@ obj{name:"피맥"}
 
 ##### Q. 객체 내에서의 this 를 설명하세요.
 
-예시)
+```javascript
 var obj = {
    init : function () {
-​      console.log(this);
+      console.log(this);
    }
 };
 obj.init();
+```
+
+
+
+------
 
 ##### Q. 객체 내의 다른 메서드를 호출해보세요.
 
