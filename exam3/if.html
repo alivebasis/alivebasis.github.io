@@ -2,27 +2,81 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>exam</title>
+<title>exam3</title>
 <link rel="stylesheet" href="common.css">
 <script src="../js/jquery-1.12.4.min.js"></script>
 <script>
 $(function(){
-	var btnNext = $('.btn_next'),
-		btnPrev = $('.btn_prev'),
-		currentIdx = 0;
-
-	function findPrevElmt(){
-		var elmtLst = $(this).siblings('.exam_q');
-	}
-	function findNextElmt(){
-		var elmtLst = $(this).siblings('.exam_q').find('ul'),
-			elmt = elmtLst.find('li');
-		console.log(currentIdx);
-		elmt.eq(currentIdx++).css('background','red');
-		console.log(currentIdx);
-	}
+	// exam1, exam2 [s]
+	var btnPrev = $('.btn_prev'),
+		btnNext = $('.btn_next'),
+		currentIdx, currentIdx2, elmtLst, elmt;
+	var findPrevElmt = function(){
+		elmtLst = $(this).siblings('.exam_q').find('ul'),
+		elmt = elmtLst.find('li');
+		!currentIdx && currentIdx != 0 ? currentIdx = elmt.length - 1 : currentIdx--;
+		setElmtColor(currentIdx);
+	};
+	var findNextElmt = function(){
+		elmtLst = $(this).siblings('.exam_q').find('ul'),
+		elmt = elmtLst.find('li');
+		!currentIdx2 && currentIdx2 != 0 ? currentIdx2 = 0 : currentIdx2++;
+		setElmtColor(currentIdx2);
+	};
+	var setElmtColor = function(idx){
+		elmt.eq(idx).css('background','yellow');
+	};
 	btnPrev.on('click', findPrevElmt);
 	btnNext.on('click', findNextElmt);
+	// exam1, exam2 [e]
+
+	// exam3 [s]
+	var elmtLst2 = $('.exam_wrap').eq(2),
+		elmt2 = elmtLst2.find('li'),
+		btnPrev2 = elmtLst2.find('button:nth-of-type(1)'),
+		btnNext2 = elmtLst2.find('button:nth-of-type(2)'),
+		oldIdx, currentIdx3 = 0;
+	var findPrevElmt2 = function(){
+		oldIdx = currentIdx3;
+		currentIdx3 == 0 ? currentIdx3 = elmt2.length - 1 : currentIdx3--;
+		setElmtColor2();
+	};
+	var findNextElmt2 = function(){
+		oldIdx = currentIdx3;
+		currentIdx3 >= elmt2.length - 1 ? currentIdx3 = 0 : currentIdx3++;
+		setElmtColor2();
+	};
+	var setElmtColor2 = function(){
+		elmt2.eq(oldIdx).css('background','');
+		elmt2.eq(currentIdx3).css('background','yellow');
+	};
+	btnPrev2.on('click', findPrevElmt2);
+	btnNext2.on('click', findNextElmt2);
+	// exam3 [e]
+
+	// exam4 [s]
+	var elmtLst3 = $('.exam_wrap').eq(3),
+		elmt3 = elmtLst3.find('li'),
+		btnPrev3 = elmtLst3.find('button:nth-of-type(1)'),
+		btnNext3 = elmtLst3.find('button:nth-of-type(2)'),
+		oldIdx2, currentIdx4 = 0;
+	var findPrevElmt3 = function(){
+		oldIdx = currentIdx4;
+		currentIdx4 == 0 ? currentIdx4 = elmt3.length - 1 : currentIdx4--;
+		setElmtColor3();
+	};
+	var findNextElmt3 = function(){
+		oldIdx = currentIdx4;
+		currentIdx4 >= elmt3.length - 1 ? currentIdx4 = 0 : currentIdx4++;
+		setElmtColor3();
+	};
+	var setElmtColor3 = function(){
+		elmt3.eq(oldIdx).removeClass('active');
+		elmt3.eq(currentIdx4).addClass('active');
+	};
+	btnPrev3.on('click', findPrevElmt3);
+	btnNext3.on('click', findNextElmt3);
+	// exam4 [e]
 });
 </script>
 </head>
@@ -82,8 +136,8 @@ $(function(){
 					<li>nine</li>
 				</ul>
 			</div>
-			<button type="button" class="btn_prev">이전</button>
-			<button type="button" class="btn_next">다음</button>
+			<button type="button">이전</button>
+			<button type="button">다음</button>
 		</div>
         <div class="exam_wrap">
             <h1>Q. 첫번째부터 순서대로 선택하고, 전에 선택했던 Element의 배경색을 지우시고, 무한loop 돌게 하세요 (클래스 제어)</h1>
@@ -100,8 +154,8 @@ $(function(){
                     <li>nine</li>
                 </ul>
             </div>
-            <button type="button" class="btn_prev">이전</button>
-            <button type="button" class="btn_next">다음</button>
+            <button type="button">이전</button>
+            <button type="button">다음</button>
         </div>
 	</div>
 	<!-- container [e] -->

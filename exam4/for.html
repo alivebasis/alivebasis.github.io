@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> dd38d3d476dfecb92b6b6ef8e474efcad770c102
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<<<<<<< HEAD
 <title>exam</title>
 <link rel="stylesheet" href="common.css" />
 <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -17,15 +21,85 @@ $(function(){
 	// var exam3 = $('.exam_q').eq(2);
 	// exam3.append('8 X 1 = 8 <br>');
 	
+=======
+<title>exam4</title>
+<link rel="stylesheet" href="common.css">
+<script src="../js/jquery-1.12.4.min.js"></script>
+<script>
+$(function(){
+	// exam1 [s]
+	var exam1 = $('.exam_q').eq(0),
+		i = 0,
+		inpArray1 = [];
+	while(i < 5){
+		// exam1.append('<input type="text"><br>');
+		inpArray1.push('<input type="text"><br>');
+		i++;
+	}
+	exam1.get(0).innerHTML = inpArray1.join('');
+	// exam1 [e]
+
+	// exam2 [s]
+	var exam2 = $('.exam_q').eq(1),
+		inpArray2 = [];
+	for(i = 0; i < 5; i++){
+		if(i % 2 == 0)
+			// exam2.append('<input type="checkbox"><br>');
+			inpArray2.push('<input type="checkbox"><br>');
+		else
+			// exam2.append('<input type="text"><br>');
+			inpArray2.push('<input type="text"><br>');
+	}
+	exam2.get(0).innerHTML = inpArray2.join('');
+	// exam2 [e]
+
+	// exam3 [s]
+	var exam3 = $('.exam_q').eq(2),
+		inpArray3 = [];
+
+	inpArray3.push('<ul>');
+	for(i = 1, max = 10; i < max; i++){
+		inpArray3.push('<li>');
+		inpArray3.push('8 X '+i+' = '+8*i);
+		inpArray3.push('</li>');
+		// exam3.append('8 X '+i+' = '+8*i+'<br>');
+	}
+	inpArray3.push('</ul>');
+	exam3.get(0).innerHTML = inpArray3.join('');
+	// exam3 [e]
+
+	// exam4 [s]
+	var exam4 = $('.exam_q').eq(3),
+		i = 2,
+		inpArray4 = [];
+
+	while(i < 10){
+		inpArray4.push('<p>' +i+ '단</p>');
+		inpArray4.push('<ul>');
+		for(j = 1, max = 10; j < max; j++){
+			inpArray4.push('<li>');
+			inpArray4.push(i+' X '+j+' = '+i*j);
+			inpArray4.push('</li>');
+			// exam4.append(i+' X '+j+" = "+i*j+'<br>');
+		}
+		inpArray4.push('</ul>');
+		i++;
+	}
+	exam4.get(0).innerHTML = inpArray4.join('');
+	// exam4 [e]
+>>>>>>> dd38d3d476dfecb92b6b6ef8e474efcad770c102
 });
 </script>
 </head>
 <body>
 <!-- wrapper [s] -->
 
+<<<<<<< HEAD
 <div id="example">
     <span>A child element</span>
 </div>
+=======
+>>>>>>> dd38d3d476dfecb92b6b6ef8e474efcad770c102
 <div id="wrapper">
 	<!-- header [s] -->
 	<div id="header">

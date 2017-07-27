@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>exam</title>
+<!-- <link rel="stylesheet" href="common.css"> -->
+<script src="js/jquery-1.12.4.min.js"></script>
+<script>
+$(function(){
+	sum();
+	function sum(){
+		var a = 10;
+		var b = 20;
+		var c = a+b;
+		// console.log(c);
+	}
+
+	var sum2 = function(a,b){
+		var c = a+b;
+		console.log('test1');
+		return c;
+		console.log('test2');
+	}
+	console.log(sum2(10,20));
+
+	(function(name){
+		console.log('This is the immediate function -> ' + name);
+	})('foo');
+
+	//Object
+	var objNames = {};
+	objNames.a = '데이터1';
+	objNames.b = '데이터2';
+	objNames.c = '데이터3';
+	// console.log(objNames);
+
+	var objNames2 = {
+		a : 10,
+		name : '홍길동',
+		fn : function(){
+			// alert(this.name);
+			console.log(this);
+			// console.log($(this).name);
+		}
+	}
+	// console.log(objNames2);
+	// objNames2.fn();
+	// console.log(this);
+	for(var key in objNames2){
+		console.log(key);
+		// console.log(objNames2[key]);
+		// console.log(key, objNames2[key]);
+	}
+	console.log(objNames2.name);
+	delete objNames2.name;
+	// console.log(objNames2.name);
+
+	var objNames3 = {
+		name : 'foo',
+		sayName : function(){
+			console.log(this.name);
+		}
+	};
+	var objNames4 = {
+		name : 'bar'
+	};
+	objNames4.sayName = objNames3.sayName;
+
+	objNames3.sayName();
+	objNames4.sayName();
+
+	var test = 'this is test';
+	console.log(window.test);
+
+	var sayFoo = function(){
+		console.log(this.test);
+	};
+	sayFoo();
+
+	var value = 100;
+
+	var myObject = {
+		value : 1,
+		func1 : function(){
+			var _this = this;
+			_this.value += 1;
+			console.log(_this.value); //this = myObject
+
+			func2 = function(){
+				_this.value += 1;
+				console.log(_this.value); //this = window
+
+				func3 = function(){
+					_this.value += 1;
+					console.log(_this.value); //this = window
+				}
+				func3();
+			}
+			func2();
+		}
+	};
+	myObject.func1();
+
+	var Person = function(name){
+		this.name = name;
+	};
+	// Person('foo'); 객체가 없으므로 오류
+	var foo = new Person('foo');
+	console.log(foo.name);
+
+});
+</script>
+</head>
+<body>
+<!-- wrapper [s] -->
+
+<div id="wrapper">
+	<!-- header [s] -->
+	<div id="header">
+	</div>
+	<!-- header [e] -->
+	<hr />
+	<!-- container [s] -->
+	<div id="container">
+	</div>
+	<!-- container [e] -->
+	<hr />
+	<!-- footer [s] -->
+	<div id="footer">
+	</div>
+	<!-- footer [e] -->
+</div>
+<!-- wrapper [e] -->
+</body>
+</html>
