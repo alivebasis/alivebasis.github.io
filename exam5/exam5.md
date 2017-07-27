@@ -114,7 +114,7 @@ console.log(obj.undefined);		//undefined
 
 ##### Q. 객체내의 모든 속성들의 값을 배열에 저장한후, abc 순으로 sorting 하여, 'abcdefg' 문자열로 출력해보세요.
 
-예시)
+```javascript
 var obj = {
    e : 'e',
    d : 'd',
@@ -124,5 +124,15 @@ var obj = {
    f : 'f',
    a : 'a'
 };
+var arr = [], idx = 0;
+for(key in obj){
+	arr[idx++] = obj[key];	//객체 obj의 key값을 배열 arr에 저장
+}
+console.log(arr);	//출력결과: ['e','d','b','g','c','f','a']
+arr.sort();
+console.log(arr);	//출력결과: ['a','b','c','d','e','f','g']
+```
+
+
 
 ##### Q. 'bcaebe' 문자열을 hasOwnProperty 를 사용해서, {a : 1, b : 2, c : 1, e : 2} 로 변경해보세요.
