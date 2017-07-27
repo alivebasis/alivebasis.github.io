@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>exam</title>
+<link rel="stylesheet" href="common.css" />
+<script src="../js/jquery-1.12.4.min.js"></script>
+<script>
+$(function(){
+	// Q1 [s]
+	var examWrap1 = $('.exam_wrap').eq(0),
+		exam1 = examWrap1.find('.exam_q'),
+		btn1 = examWrap1.find('button');
+
+	var arr1 = ['Lee','Jaegeun'], str1;
+	exam1.text("Array.isArray() : " +
+				Array.isArray(arr1) +
+				" / [" + arr1 + "]");
+	btn1.on('click',function(){
+		str1 = arr1.join(' ');
+		exam1.text("typeof : " +
+					typeof str1 +
+					" / " + str1);
+	});
+	// Q1 [e]
+
+	// Q2 [s]
+	var examWrap2 = $('.exam_wrap').eq(1),
+		exam2 = examWrap2.find('.exam_q'),
+		btn2 = examWrap2.find('button');
+
+	var str2 = 'question', str3 = '';
+	exam2.text(str2);
+	for(var i=str2.length-1, imin=0; i>=imin; i--){
+		str3 += str2[i];
+	}
+	btn2.on('click',function(){
+		exam2.text(str3);
+	});
+	// Q2 [e]
+
+	// Q3 [s]
+	var examWrap3 = $('.exam_wrap').eq(2),
+		exam3 = examWrap3.find('.exam_q'),
+		btn3 = examWrap3.find('button');
+
+	var arr2 = [40, 100, 1, 5, 25, 10],
+		arr3, arr4 = [];
+
+	arr3 = arr2.slice(0,6);
+	exam3.text(arr3);
+	arr2.sort(function(a,b){
+		return b-a;
+	});
+
+	for(var i=0,imax=arr2.length; i<imax; i++){
+		for(var j=0,jmax=arr3.length; j<jmax; j++){
+			if(arr2[i] === arr3[j]){
+				arr4[i] = j;
+			}
+		}
+	}
+	btn3.on('click',function(){
+		exam3.text(arr4);
+	});
+
+
+	// Q3 [e]
+});
+</script>
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrapper">
+	<!-- header [s] -->
+	<div id="header">
+	</div>
+	<!-- header [e] -->
+	<hr />
+	<!-- container [s] -->
+	<div id="container">
+		<div class="exam_wrap">
+			<h1>Q. 배열에 본인 이름을 한글자씩 담은 다음 문자열로 출력하세요.</h1>
+			<div>예시) ['Lee', 'Jaegeun'] => 'Lee Jaegeun'</div>
+			<div class="exam_q"></div>
+			<button type="button">버튼</button>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 'question' 문자열을 거꾸로 출력하세요. (for문 사용)</h1>
+			<div>예시) 'question' => 'noitseuq'</div>
+			<div class="exam_q"></div>
+			<button type="button">버튼</button>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. [40, 100, 1, 5, 25, 10] 에서 가장 큰 수 순서대로 index 를 배열로 출력하세요.  (for/if문 사용)</h1>
+			<div>예시) [40, 100, 1, 5, 25, 10] => [1, 0, 4, 5, 3, 2]</div>
+			<div class="exam_q"></div>
+			<button type="button">버튼</button>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 2중 배열로 구구단을 만드세요. (for문 사용)</h1>
+			<div class="exam_q">예시) [[2,4,6...],[3,6,9...]...]</div>
+			<button type="button">버튼</button>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 배열에 숫자 0 ~ 9까지 담아보세요. (for문 사용)</h1>
+			<div class="exam_q">예시) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</div>
+			<button type="button">버튼</button>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 배열에 숫자 0 ~ 5 사이의 랜덤한 숫자를 6개 담아보세요. (for문 사용)</h1>
+			<div class="exam_q">예시) [4, 2, 3, 2, 3, 0]</div>
+			<button type="button">버튼</button>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 배열에 숫자 0 ~ 9까지 담고, 버튼 클릭시 랜덤한 숫자를 하나씩 빼주세요.</h1>
+			<div class="exam_q">예시) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] => [0, 1, 2, 3, 4, 5, 7, 8, 9] => [0, 1, 3, 4, 5, 7, 8, 9]</div>
+			<button type="button">버튼</button>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 배열에 숫자 0 ~ 5 사이의 랜덤한 숫자를 중복되는 값이 없도록 6개 담아보세요. (for/if문 사용)</h1>
+			<div class="exam_q">예시) [4, 2, 3, 1, 5, 0]</div>
+			<button type="button">버튼</button>
+		</div>
+	</div>
+	<!-- container [e] -->
+	<hr />
+	<!-- footer [s] -->
+	<div id="footer">
+	</div>
+	<!-- footer [e] -->
+</div>
+<!-- wrapper [e] -->
+</body>
+</html>

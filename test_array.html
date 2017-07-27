@@ -3,17 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
+<script src="js/jquery-1.12.4.min.js"></script>
 <title>테스트</title>
 </head>
 <body>
-
 <script>
-var a = {
-	name : 'JG',
-	age : '100'
+var a = 'bcaebe',
+	b = {};
+	
+for(key in a){
+	if(a.hasOwnProperty(key)){
+		console.log(a[key]);
+	}
 }
 var b = a.hasOwnProperty('name');
+console.log(a.hasOwnProperty('a'));
 var c = a.hasOwnProperty('address');
+// 문자열을 hasOwnProperty 를 사용해서, {a : 1, b : 2, c : 1, e : 2} 로 변경해보세요.
+
+a.name = '1';
+console.log(a);
 console.log(b); //결과: true
 console.log(c); //결과: false
 </script>
