@@ -15,12 +15,12 @@ $(function(){
 	var arr1 = ['Lee','Jaegeun'], str1;
 	exam1.text("Array.isArray() : " +
 				Array.isArray(arr1) +
-				" / [" + arr1 + "]");
+				" / [" + arr1 + "]"); //기존 배열값 출력
 	btn1.on('click',function(){
 		str1 = arr1.join(' ');
 		exam1.text("typeof : " +
 					typeof str1 +
-					" / " + str1);
+					" / " + str1); //변경된 배열값 출력
 	});
 	// Q1 [e]
 
@@ -29,13 +29,13 @@ $(function(){
 		exam2 = examWrap2.find('.exam_q'),
 		btn2 = examWrap2.find('button');
 
-	var str2 = 'question', str3 = '';
-	exam2.text(str2);
-	for(var i=str2.length-1, imin=0; i>=imin; i--){
-		str3 += str2[i];
+	var examStr = 'question', str2 = '';
+	exam2.text(examStr); //기존 배열값 출력
+	for(var i=examStr.length-1, imin=0; i>=imin; i--){
+		str2 += examStr[i];
 	}
 	btn2.on('click',function(){
-		exam2.text(str3);
+		exam2.text(str2); //변경된 배열값 출력
 	});
 	// Q2 [e]
 
@@ -44,28 +44,34 @@ $(function(){
 		exam3 = examWrap3.find('.exam_q'),
 		btn3 = examWrap3.find('button');
 
-	var arr2 = [40, 100, 1, 5, 25, 10],
-		arr3, arr4 = [];
+	var arr3 = [40, 100, 1, 5, 25, 10],
+		origin, final = [];
 
-	arr3 = arr2.slice(0,6);
-	exam3.text(arr3);
-	arr2.sort(function(a,b){
+	origin = arr3.slice(0,6);
+	exam3.text(origin); //기존 배열값 출력
+	arr3.sort(function(a,b){
 		return b-a;
 	});
 
-	for(var i=0,imax=arr2.length; i<imax; i++){
-		for(var j=0,jmax=arr3.length; j<jmax; j++){
-			if(arr2[i] === arr3[j]){
-				arr4[i] = j;
+	for(var i=0,imax=arr3.length; i<imax; i++){
+		for(var j=0,jmax=origin.length; j<jmax; j++){
+			if(arr3[i] === origin[j]){
+				final[i] = j;
 			}
 		}
 	}
 	btn3.on('click',function(){
-		exam3.text(arr4);
+		exam3.text(final); //변경된 배열값 출력
 	});
-
-
 	// Q3 [e]
+
+	// Q4 [s]
+	var examWrap4 = $('.exam_wrap').eq(3),
+		exam4 = examWrap4.find('.exam_q'),
+		btn4 = examWrap4.find('button');
+
+	var arr
+	// Q4 [e]
 });
 </script>
 </head>

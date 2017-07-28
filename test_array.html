@@ -9,22 +9,26 @@
 <body>
 <script>
 var a = 'bcaebe',
-	b = {};
+	b = {}, cnt = 0;
 	
 for(key in a){
 	if(a.hasOwnProperty(key)){
-		console.log(a[key]);
+		console.log(key, a[key]);
+		key = a[key];
+		b[key] = cnt;
 	}
 }
-var b = a.hasOwnProperty('name');
-console.log(a.hasOwnProperty('a'));
-var c = a.hasOwnProperty('address');
+console.log(b);
+for(key in b){
+	if(b.hasOwnProperty(key)){
+		console.log(key, b[key]);
+	}
+}
+// var b = a.hasOwnProperty('name');
+// console.log(a.hasOwnProperty('a'));
+// var c = a.hasOwnProperty('address');
 // 문자열을 hasOwnProperty 를 사용해서, {a : 1, b : 2, c : 1, e : 2} 로 변경해보세요.
 
-a.name = '1';
-console.log(a);
-console.log(b); //결과: true
-console.log(c); //결과: false
 </script>
 </body>
 </html>
