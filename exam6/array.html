@@ -13,14 +13,10 @@ $(function(){
 		btn1 = examWrap1.find('button');
 
 	var arr1 = ['Lee','Jaegeun'], str1;
-	exam1.text("Array.isArray() : " +
-				Array.isArray(arr1) +
-				" / [" + arr1 + "]"); //기존 배열값 출력
+	console.log('Q1 문제 : ' + arr1);
 	btn1.on('click',function(){
 		str1 = arr1.join(' ');
-		exam1.text("typeof : " +
-					typeof str1 +
-					" / " + str1); //변경된 배열값 출력
+		console.log('Q1 결과 : ' + arr1);
 	});
 	// Q1 [e]
 
@@ -30,12 +26,12 @@ $(function(){
 		btn2 = examWrap2.find('button');
 
 	var examStr = 'question', str2 = '';
-	exam2.text(examStr); //기존 배열값 출력
+	console.log('Q2 문제 : ' + examStr);
 	for(var i=examStr.length-1, imin=0; i>=imin; i--){
 		str2 += examStr[i];
 	}
 	btn2.on('click',function(){
-		exam2.text(str2); //변경된 배열값 출력
+		console.log('Q2 결과 : ' + str2);
 	});
 	// Q2 [e]
 
@@ -48,7 +44,8 @@ $(function(){
 		origin, final = [];
 
 	origin = arr3.slice(0,6);
-	exam3.text(origin); //기존 배열값 출력
+	console.log('Q3 문제 ↓');
+	console.log(origin);
 	arr3.sort(function(a,b){
 		return b-a;
 	});
@@ -61,7 +58,8 @@ $(function(){
 		}
 	}
 	btn3.on('click',function(){
-		exam3.text(final); //변경된 배열값 출력
+		console.log('Q3 결과 ↓');
+		console.log(final);
 	});
 	// Q3 [e]
 
@@ -78,9 +76,88 @@ $(function(){
 		}
 	}
 	btn4.on('click',function(){
-		console.dir(arr);
+		console.log('Q4 결과 ↓')
+		for(var i=0,imax=8; i<imax; i++){
+			console.log(arr[i][0] + '단');
+			console.log(arr[i]);
+			for(var j=0,jmax=8; j<jmax; j++){
+				console.log('arr[' + i + '][' + j + '] : ' + arr[i][j]);
+			}
+		}
 	})
 	// Q4 [e]
+
+	// Q5 [s]
+	var examWrap5 = $('.exam_wrap').eq(4),
+		exam5 = examWrap5.find('.exam_q'),
+		btn5 = examWrap5.find('button');
+
+	var arr2 = [];
+	for(var i=0,imax=9; i<=imax; i++){
+		arr2.push(i);
+	}
+	btn5.on('click',function(){
+		console.log('Q5 결과 ↓');
+		console.log(arr2);
+	});
+	// Q5 [e]
+
+	// Q6 [s]
+	var examWrap6 = $('.exam_wrap').eq(5),
+		exam6 = examWrap6.find('.exam_q'),
+		btn6 = examWrap6.find('button');
+
+	var arr3 = [];
+	for(var i=0,imax=6; i<imax; i++){
+		arr3[i] = Math.round(Math.random() * 5);
+	}
+	btn6.on('click',function(){
+		console.log('Q6 결과 ↓');
+		console.log(arr3);
+	});
+	// Q6 [e]
+
+	// Q7 [s]
+	var examWrap7 = $('.exam_wrap').eq(6),
+		exam7 = examWrap7.find('.exam_q'),
+		btn7 = examWrap7.find('button');
+
+	var arr4 = [], idx;
+	for(var i=0,imax=10; i<imax; i++){
+		arr4[i] = i;
+	}
+	console.log('Q7 문제 ↓');
+	console.log(arr4);
+	btn7.on('click',function(){
+		if(arr4.length > 0){ //배열 요소가 0개가 될때까지 반복
+			idx = Math.round(Math.random() * (arr4.length-1));
+			arr4.splice(idx, 1); //배열 길이에 해당하는 숫자 내에서, 랜덤한 숫자를 1개씩 삭제
+			console.log('index(' + idx + ') 요소삭제 => [' + arr4 + ']');
+		}
+	});
+	// Q7 [e]
+
+	// Q8 [s]
+	var examWrap8 = $('.exam_wrap').eq(7),
+		exam8 = examWrap8.find('.exam_q'),
+		btn8 = examWrap8.find('button');
+
+	var arr5 = [], ranVal;
+	btn8.on('click',function(){
+		for(var i=0; i<6; i++){
+			ranVal = Math.round(Math.random() * 5);
+			arr5[i] = ranVal;
+			for(var j=0; j<i; j++){
+				if(arr5[i] == arr5[j]){ //배열 간 중복값이 있다면
+					arr5.pop();	//중복 요소 제거
+					i--;	//제거된 요소에 값을 다시 채우기 위해 index 감소
+				}
+			}
+		}
+		console.log('Q8 결과 ↓');
+		console.log(arr5);
+	});
+	// Q8 [e]
 });
 </script>
 </head>
@@ -95,46 +172,45 @@ $(function(){
 	<!-- container [s] -->
 	<div id="container">
 		<div class="exam_wrap">
-			<h1>Q. 배열에 본인 이름을 한글자씩 담은 다음 문자열로 출력하세요.</h1>
+			<h1>Q1. 배열에 본인 이름을 한글자씩 담은 다음 문자열로 출력하세요.</h1>
 			<div>예시) ['Lee', 'Jaegeun'] => 'Lee Jaegeun'</div>
 			<div class="exam_q"></div>
 			<button type="button">버튼</button>
 		</div>
 		<div class="exam_wrap">
-			<h1>Q. 'question' 문자열을 거꾸로 출력하세요. (for문 사용)</h1>
+			<h1>Q2. 'question' 문자열을 거꾸로 출력하세요. (for문 사용)</h1>
 			<div>예시) 'question' => 'noitseuq'</div>
 			<div class="exam_q"></div>
 			<button type="button">버튼</button>
 		</div>
 		<div class="exam_wrap">
-			<h1>Q. [40, 100, 1, 5, 25, 10] 에서 가장 큰 수 순서대로 index 를 배열로 출력하세요.  (for/if문 사용)</h1>
+			<h1>Q3. [40, 100, 1, 5, 25, 10] 에서 가장 큰 수 순서대로 index 를 배열로 출력하세요.  (for/if문 사용)</h1>
 			<div>예시) [40, 100, 1, 5, 25, 10] => [1, 0, 4, 5, 3, 2]</div>
 			<div class="exam_q"></div>
 			<button type="button">버튼</button>
 		</div>
 		<div class="exam_wrap">
-			<h1>Q. 2중 배열로 구구단을 만드세요. (for문 사용)</h1>
-			<div>console로 확인 부탁드립니다.</div>
+			<h1>Q4. 2중 배열로 구구단을 만드세요. (for문 사용)</h1>
 			<div class="exam_q">예시) [[2,4,6...],[3,6,9...]...]</div>
 			<button type="button">버튼</button>
 		</div>
 		<div class="exam_wrap">
-			<h1>Q. 배열에 숫자 0 ~ 9까지 담아보세요. (for문 사용)</h1>
+			<h1>Q5. 배열에 숫자 0 ~ 9까지 담아보세요. (for문 사용)</h1>
 			<div class="exam_q">예시) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</div>
 			<button type="button">버튼</button>
 		</div>
 		<div class="exam_wrap">
-			<h1>Q. 배열에 숫자 0 ~ 5 사이의 랜덤한 숫자를 6개 담아보세요. (for문 사용)</h1>
+			<h1>Q6. 배열에 숫자 0 ~ 5 사이의 랜덤한 숫자를 6개 담아보세요. (for문 사용)</h1>
 			<div class="exam_q">예시) [4, 2, 3, 2, 3, 0]</div>
 			<button type="button">버튼</button>
 		</div>
 		<div class="exam_wrap">
-			<h1>Q. 배열에 숫자 0 ~ 9까지 담고, 버튼 클릭시 랜덤한 숫자를 하나씩 빼주세요.</h1>
+			<h1>Q7. 배열에 숫자 0 ~ 9까지 담고, 버튼 클릭시 랜덤한 숫자를 하나씩 빼주세요.</h1>
 			<div class="exam_q">예시) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] => [0, 1, 2, 3, 4, 5, 7, 8, 9] => [0, 1, 3, 4, 5, 7, 8, 9]</div>
 			<button type="button">버튼</button>
 		</div>
 		<div class="exam_wrap">
-			<h1>Q. 배열에 숫자 0 ~ 5 사이의 랜덤한 숫자를 중복되는 값이 없도록 6개 담아보세요. (for/if문 사용)</h1>
+			<h1>Q8. 배열에 숫자 0 ~ 5 사이의 랜덤한 숫자를 중복되는 값이 없도록 6개 담아보세요. (for/if문 사용)</h1>
 			<div class="exam_q">예시) [4, 2, 3, 1, 5, 0]</div>
 			<button type="button">버튼</button>
 		</div>
