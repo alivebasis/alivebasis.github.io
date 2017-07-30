@@ -70,7 +70,16 @@ $(function(){
 		exam4 = examWrap4.find('.exam_q'),
 		btn4 = examWrap4.find('button');
 
-	var arr
+	var arr = [];
+	for(var i=1,imax=9; i<imax; i++){
+		arr[i-1] = []; //배열 내 배열 재선언 [[], [], [],...]
+		for(var j=0,jmax=9; j<jmax; j++){
+			arr[i-1][j] = (i+1) * (j+1);
+		}
+	}
+	btn4.on('click',function(){
+		console.dir(arr);
+	})
 	// Q4 [e]
 });
 </script>
@@ -105,6 +114,7 @@ $(function(){
 		</div>
 		<div class="exam_wrap">
 			<h1>Q. 2중 배열로 구구단을 만드세요. (for문 사용)</h1>
+			<div>console로 확인 부탁드립니다.</div>
 			<div class="exam_q">예시) [[2,4,6...],[3,6,9...]...]</div>
 			<button type="button">버튼</button>
 		</div>

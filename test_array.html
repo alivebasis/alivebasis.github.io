@@ -9,26 +9,21 @@
 <body>
 <script>
 var a = 'bcaebe',
-	b = {}, cnt = 0;
+	b = [],
+	c = {};
 	
 for(key in a){
 	if(a.hasOwnProperty(key)){
-		console.log(key, a[key]);
-		key = a[key];
-		b[key] = cnt;
+		b.push(a[key]); //문자열 값을 배열에 저장
 	}
 }
 console.log(b);
-for(key in b){
-	if(b.hasOwnProperty(key)){
-		console.log(key, b[key]);
-	}
+b.sort(); //배열 abc순으로 정렬
+console.log(b);
+for(var i=0, imax=b.length; i<imax; i++){
+	(b[i] === 'b' || b[i] === 'e') ? c[b[i]] = 2 : c[b[i]] = 1;
 }
-// var b = a.hasOwnProperty('name');
-// console.log(a.hasOwnProperty('a'));
-// var c = a.hasOwnProperty('address');
-// 문자열을 hasOwnProperty 를 사용해서, {a : 1, b : 2, c : 1, e : 2} 로 변경해보세요.
-
+console.log(c);
 </script>
 </body>
 </html>

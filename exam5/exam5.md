@@ -124,15 +124,37 @@ var obj = {
    f : 'f',
    a : 'a'
 };
-var arr = [], idx = 0;
+var arr = [], //최종 결과값 저장할 배열 선언
+    idx = 0;
 for(key in obj){
 	arr[idx++] = obj[key];	//객체 obj의 key값을 배열 arr에 저장
 }
-console.log(arr);	//출력결과: ['e','d','b','g','c','f','a']
+console.log(arr);		//출력결과: ['e','d','b','g','c','f','a']
 arr.sort();
-console.log(arr);	//출력결과: ['a','b','c','d','e','f','g']
+console.log(arr);		//출력결과: ['a','b','c','d','e','f','g']
 ```
 
 
 
 ##### Q. 'bcaebe' 문자열을 hasOwnProperty 를 사용해서, {a : 1, b : 2, c : 1, e : 2} 로 변경해보세요.
+
+```javascript
+var a = 'bcaebe',
+	b = [], //sort를 위해 배열 선언
+	c = {};	//최종 결과값 저장할 객체 선언
+	
+for(key in a){
+	if(a.hasOwnProperty(key)){
+		b.push(a[key]); //문자열 값을 배열에 저장
+	}
+}
+console.log(b);			//출력결과 : ['b','c','a','e','b','e']
+b.sort(); //배열 abc순으로 정렬
+console.log(b);			//출력결과 : ['a','b','b','c','e','e']
+
+for(var i=0, imax=b.length; i<imax; i++){
+	(b[i] === 'b' || b[i] === 'e') ? c[b[i]] = 2 : c[b[i]] = 1; //객체에 key 저장
+  	//출력결과 : {a:1, b:2, c:1, e:2}
+}
+console.log(c);
+```
