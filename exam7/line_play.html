@@ -1,24 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
-    <title>Line Play</title>
-    <style>
-        *{margin:0;padding:0}
-        body{font-family:'나눔고딕';line-height:1.5;color:#555}
-        ul,li{list-style:none}
-        button{cursor:pointer}
-        button::-moz-focus-inner{padding:0;border:0}
-        .create_wrap{width:500px;margin:50px auto}
-        .swiper-container{overflow:hidden;width:500px;height:380px}
-        .swiper-container img{max-width:100%;vertical-align:top}
-        .swiper-wrapper{position:relative;height:100%;}
-        .swiper-wrapper .swiper-slide{position:absolute;left:0;top:0}
-        .btn_random{display:block;margin:20px auto 0;padding:15px 30px;border:2px solid #00ce23;border-radius:10px;background:none;font-family:inherit;font-weight:bold;font-size:20px;color:#00ce23}
-        .btn_random:after{display:inline-block;width:17px;height:15px;margin-top:-4px;margin-left:5px;background:url('img/ico.png') no-repeat;background-size:100% auto;vertical-align:middle;content:''}
-    </style>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+<title>Line Play</title>
+<script src="../js/jquery-1.12.4.min.js"></script>
+<style>
+*{margin:0;padding:0}
+body{font-family:'나눔고딕';line-height:1.5;color:#555}
+ul,li{list-style:none}
+button{cursor:pointer}
+button::-moz-focus-inner{padding:0;border:0}
+.create_wrap{width:500px;margin:50px auto}
+.swiper-container{overflow:hidden;width:500px;height:380px}
+.swiper-container img{max-width:100%;vertical-align:top}
+.swiper-wrapper{position:relative;height:100%;}
+.swiper-wrapper .swiper-slide{position:absolute;left:0;top:0}
+.btn_random{display:block;margin:20px auto 0;padding:15px 30px;border:2px solid #00ce23;border-radius:10px;background:none;font-family:inherit;font-weight:bold;font-size:20px;color:#00ce23}
+.btn_random:after{display:inline-block;width:17px;height:15px;margin-top:-4px;margin-left:5px;background:url('img/ico.png') no-repeat;background-size:100% auto;vertical-align:middle;content:''}
+</style>
+<script>
+$(function(){
+    var createWrap = $('.create_wrap'),
+        slideLst = createWrap.find('.swiper-wrapper'),
+        btnRandom = createWrap.find('.btn_random'),
+        slide = slideLst.find('.swiper-slide'),
+        slideLength = slideLst.children().length,
+        randomIdx, lastIdx,
+        slideArray = []; //이미지 순서를 랜덤으로 저장할 배열
+
+    var randomImg = {
+        init : function(){
+            this.setElements();
+            this.setSlideArray();
+            this.slideFunc();
+            this.bindEvents();
+        },
+        setElements : function(){
+            this.createWrap = $('.create_wrap');
+            this.slideLst = this.createWrap.find('.swiper-wrapper');
+            this.btn = this.createWrap.find('.btn_random');
+            this.slide = this.slideLst.find('.swiper-slide');
+            this.slideLength = this.slideLst.children().length;
+        },
+        bindEvents : function(){
+            this.btn.on('click', $.proxy(this.slideFunc, this));
+        },
+        setSlideArray : function(){
+            this.slideArray = [];
+            for(var i=0,imax=this.slideLength; i<imax; i++){
+                this.slideArray[i] = Math.floor(Math.random() * this.slideLength);
+
+                if(this.slideArray[0] === this.lastIdx){
+                //다시 처음부터 12개씩 랜덤으로 시작할때 첫번째 이미지가, 이전 순서의 마지막 이미지와 일치할 경우 
+                    i--; //다시 랜덤함수 실행
+                    continue;
+                }
+                for(var j=0; j<i; j++){
+                    if(this.slideArray[i] === this.slideArray[j]){ //중복 제거
+                        i--;
+                        continue;
+                    }
+                }
+            }
+            this.lastIdx = this.slideArray[this.slideArray.length-1];
+            //다시 처음부터 12개씩 랜덤으로 시작할때, 바로 전에 나왔던 이미지와 중복이 되지 않도록 마지막 index값을 저장
+        },
+        slideFunc : function(){
+            if(this.slideArray.length){
+                //이미 랜덤으로 순서가 정해졌으므로, 0번째 index에 해당하는 이미지를 보여주고, 삭제
+                this.randomIdx = this.slideArray[0];
+                this.slide.eq(this.randomIdx).show().siblings().hide();
+                this.slideArray.splice(0, 1);
+            }else{
+                this.setSlideArray();
+                this.slideFunc();
+            }
+        }
+    }
+    randomImg.init();
+});
+</script>
 </head>
 <body>
 <div class="create_wrap js-play-wrap">

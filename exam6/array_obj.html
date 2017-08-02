@@ -7,6 +7,7 @@
 <script src="../js/jquery-1.12.4.min.js"></script>
 <script>
 $(function(){
+	// Q1 [s]
 	var examObj1 = {
 		init : function () {
 			this.setElements();
@@ -25,26 +26,13 @@ $(function(){
 			this.btn.on('click', $.proxy(this.onClickFunc, this));
 		},
 		onClickFunc : function () {
-			this.arr.join(' ');
 			this.viewFunc();
 		},
 		viewFunc : function () {
-			this.exam.get(0).innerHTML = arr1;
+			this.exam.get(0).innerHTML = this.arr.join(' ');
 		}
 	};
 	examObj1.init();
-
-	// Q1 [s]
-	var examWrap1 = $('.exam_wrap').eq(0),
-		exam1 = examWrap1.find('.exam_q'),
-		btn1 = examWrap1.find('button');
-
-	var arr1 = ['Lee','Jaegeun'], str1;
-	console.log('Q1 문제 : ' + arr1);
-	btn1.on('click',function(){
-		str1 = arr1.join(' ');
-		console.log('Q1 결과 : ' + arr1);
-	});
 	// Q1 [e]
 
 	// Q2 [s]
