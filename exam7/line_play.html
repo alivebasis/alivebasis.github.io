@@ -22,19 +22,11 @@ button::-moz-focus-inner{padding:0;border:0}
 </style>
 <script>
 $(function(){
-    var createWrap = $('.create_wrap'),
-        slideLst = createWrap.find('.swiper-wrapper'),
-        btnRandom = createWrap.find('.btn_random'),
-        slide = slideLst.find('.swiper-slide'),
-        slideLength = slideLst.children().length,
-        randomIdx, lastIdx,
-        slideArray = []; //이미지 순서를 랜덤으로 저장할 배열
-
     var randomImg = {
         init : function(){
             this.setElements();
-            this.setSlideArray();
-            this.slideFunc();
+            this.setArray();
+            this.randomSlide();
             this.bindEvents();
         },
         setElements : function(){
@@ -45,16 +37,18 @@ $(function(){
             this.slideLength = this.slideLst.children().length;
         },
         bindEvents : function(){
-            this.btn.on('click', $.proxy(this.slideFunc, this));
+            this.btn.on('click', $.proxy(this.randomSlide, this));
         },
-        setSlideArray : function(){
-            this.slideArray = [];
+        setArray : function(){
+            this.slideArray = []; //랜덤 숫자를 저장할 배열
             for(var i=0,imax=this.slideLength; i<imax; i++){
                 this.slideArray[i] = Math.floor(Math.random() * this.slideLength);
 
                 if(this.slideArray[0] === this.lastIdx){
-                //다시 처음부터 12개씩 랜덤으로 시작할때 첫번째 이미지가, 이전 순서의 마지막 이미지와 일치할 경우 
-                    i--; //다시 랜덤함수 실행
+                /* 다시 처음부터 12개씩 랜덤으로 시작할때
+                첫번째 이미지가, 이전 순서의 마지막 이미지와 일치할 경우
+                다시 Math.random 실행 */
+                    i--;
                     continue;
                 }
                 for(var j=0; j<i; j++){
@@ -65,17 +59,18 @@ $(function(){
                 }
             }
             this.lastIdx = this.slideArray[this.slideArray.length-1];
-            //다시 처음부터 12개씩 랜덤으로 시작할때, 바로 전에 나왔던 이미지와 중복이 되지 않도록 마지막 index값을 저장
+            /* 다시 처음부터 12개씩 랜덤으로 시작할때
+            바로 전에 나왔던 이미지와 중복이 되지 않도록 마지막 index값을 저장 */
         },
-        slideFunc : function(){
+        randomSlide : function(){
             if(this.slideArray.length){
-                //이미 랜덤으로 순서가 정해졌으므로, 0번째 index에 해당하는 이미지를 보여주고, 삭제
+            //이미 랜덤으로 순서가 정해졌으므로, 순서대로 index(0번째)에 해당하는 이미지를 노출
                 this.randomIdx = this.slideArray[0];
                 this.slide.eq(this.randomIdx).show().siblings().hide();
                 this.slideArray.splice(0, 1);
             }else{
-                this.setSlideArray();
-                this.slideFunc();
+                this.setArray();
+                this.randomSlide();
             }
         }
     }
