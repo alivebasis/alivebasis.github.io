@@ -36,70 +36,110 @@ $(function(){
 	// Q1 [e]
 
 	// Q2 [s]
-	var examWrap2 = $('.exam_wrap').eq(1),
-		exam2 = examWrap2.find('.exam_q'),
-		btn2 = examWrap2.find('button');
-
-	var examStr = 'question', str2 = '';
-	console.log('Q2 문제 : ' + examStr);
-	for(var i=examStr.length-1, imin=0; i>=imin; i--){
-		str2 += examStr[i];
+	var examObj2 = {
+		init : function () {
+			this.setElements();
+			this.initElements();
+			this.bindEvents();
+		},
+		setElements : function () {
+			this.examWrap = $('.exam_wrap').eq(1);
+			this.exam = this.examWrap.find('.exam_q');
+			this.btn = this.examWrap.find('button');
+		},
+		initElements : function () {
+			this.examStr = 'question';
+			this.str = '';
+		},
+		bindEvents : function () {
+			this.btn.on('click', $.proxy(this.onClickFunc, this));
+		},
+		onClickFunc : function () {
+			for(var i=this.examStr.length-1, imin=0; i>=imin; i--){
+				this.str += this.examStr[i];
+			}
+			this.viewFunc();
+		},
+		viewFunc : function () {
+			this.exam.get(0).innerHTML = this.str;
+		}
 	}
-	btn2.on('click',function(){
-		console.log('Q2 결과 : ' + str2);
-	});
+	examObj2.init();
 	// Q2 [e]
 
 	// Q3 [s]
-	var examWrap3 = $('.exam_wrap').eq(2),
-		exam3 = examWrap3.find('.exam_q'),
-		btn3 = examWrap3.find('button');
-
-	var arr3 = [40, 100, 1, 5, 25, 10],
-		origin, final = [];
-
-	origin = arr3.slice(0,6);
-	console.log('Q3 문제 ↓');
-	console.log(origin);
-	arr3.sort(function(a,b){
-		return b-a;
-	});
-
-	for(var i=0,imax=arr3.length; i<imax; i++){
-		for(var j=0,jmax=origin.length; j<jmax; j++){
-			if(arr3[i] === origin[j]){
-				final[i] = j;
+	var examObj3 = {
+		init : function () {
+			this.setElements();
+			this.initElements();
+			this.bindEvents();
+		},
+		setElements : function () {
+			this.examWrap = $('.exam_wrap').eq(2);
+			this.exam = this.examWrap.find('.exam_q');
+			this.btn = this.examWrap.find('button');
+		},
+		initElements : function () {
+			this.examArr = [40, 100, 1, 5, 25, 10];
+			this.origin = this.examArr.slice(0,6).sort(function(a,b){ return b-a });
+			this.final = [];
+		},
+		bindEvents : function () {
+			this.btn.on('click', $.proxy(this.onClickFunc, this));
+		},
+		onClickFunc : function () {
+			for(var i=0,imax=this.examArr.length; i<imax; i++){
+				for(var j=0,jmax=this.origin.length; j<jmax; j++){
+					if(this.examArr[i] === this.origin[j]){
+						this.final[i] = j;
+					}
+				}
 			}
+			this.viewFunc();
+		},
+		viewFunc : function () {
+			this.exam.get(0).innerHTML = this.final;
 		}
 	}
-	btn3.on('click',function(){
-		console.log('Q3 결과 ↓');
-		console.log(final);
-	});
+	examObj3.init();
 	// Q3 [e]
 
 	// Q4 [s]
-	var examWrap4 = $('.exam_wrap').eq(3),
-		exam4 = examWrap4.find('.exam_q'),
-		btn4 = examWrap4.find('button');
-
-	var arr = [];
-	for(var i=1,imax=9; i<imax; i++){
-		arr[i-1] = []; //배열 내 배열 재선언 [[], [], [],...]
-		for(var j=0,jmax=9; j<jmax; j++){
-			arr[i-1][j] = (i+1) * (j+1);
+	var examObj4 = {
+		init : function () {
+			this.setElements();
+			this.initElements();
+			this.bindEvents();
+		},
+		setElements : function () {
+			this.examWrap = $('.exam_wrap').eq(3);
+			this.exam = this.examWrap.find('.exam_q');
+			this.btn = this.examWrap.find('button');
+		},
+		initElements : function () {
+			this.arr = [];
+		},
+		bindEvents : function () {
+			this.btn.on('click', $.proxy(this.onClickFunc, this));
+		},
+		onClickFunc : function () {
+			for(var i=1,imax=9; i<imax; i++){
+				this.arr[i-1] = []; //배열 내 배열 재선언 [[], [], [],...]
+				for(var j=0,jmax=9; j<jmax; j++){
+					this.arr[i-1][j] = (i+1) * (j+1);
+				}
+			}
+			this.viewFunc();
+		},
+		viewFunc : function () {
+			this.resultStr = '';
+			for(var i=0,imax=8; i<imax; i++){
+				this.resultStr += '[' + this.arr[i] + '] ';
+			}
+			this.exam.get(0).innerHTML = this.resultStr;
 		}
 	}
-	btn4.on('click',function(){
-		console.log('Q4 결과 ↓')
-		for(var i=0,imax=8; i<imax; i++){
-			console.log(arr[i][0] + '단');
-			console.log(arr[i]);
-			for(var j=0,jmax=8; j<jmax; j++){
-				console.log('arr[' + i + '][' + j + '] : ' + arr[i][j]);
-			}
-		}
-	})
+	examObj4.init();
 	// Q4 [e]
 
 	// Q5 [s]
@@ -200,7 +240,7 @@ $(function(){
 		</div>
 		<div class="exam_wrap">
 			<h1>Q3. [40, 100, 1, 5, 25, 10] 에서 가장 큰 수 순서대로 index 를 배열로 출력하세요.  (for/if문 사용)</h1>
-			<div>예시) [40, 100, 1, 5, 25, 10] => [1, 0, 4, 5, 3, 2]</div>
+			<div>예시) [40, 100, 1, 5, 25, 10] => [1, 0, 5, 4, 2, 3]</div>
 			<div class="exam_q"></div>
 			<button type="button">버튼</button>
 		</div>
