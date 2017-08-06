@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>bear</title>
+<link rel="stylesheet" type="text/css" href="css/coca.css">
+</head>
+<body>
+<div class="evt_wrap">
+	<div class="evt_tit">
+		<div class="tit_area">
+			<h2 class="blind">1등 곰도 맞추고 100% 경품까지 폴라베어를 잡아라!</h2>
+		</div>
+	</div>
+	
+	<div class="evt_ct">
+		<div class="evt_area">
+			<p class="blind">100% 당첨! 가장먼저 도착하는 폴라베어를 맞춰주세요</p>
+			<ul class="bxlst" id="clickLst">
+			<li class="rabx">
+				<input type="radio" name="beautybox" id="bx"/>
+				<label for="bx"><span class="blind">스키타는 베어</span></label>
+			</li>
+			<li class="rabx">
+				<input type="radio" name="beautybox" id="bx2"/>
+				<label for="bx2"><span class="blind">보드타는 베어</span></label>
+			</li>
+			<li class="rabx">
+				<input type="radio" name="beautybox" id="bx3"/>
+				<label for="bx3"><span class="blind">스케이트 베어</span></label>
+			</li>
+			</ul>
+			<a href="#" class="btn btn_app">choice</a>
+		</div>
+	</div>
+	
+	<div class="evt_ct2">
+		<ul class="game_area sp" id="gameLst">
+		<li class="lane"><div class="sp gom"></div></li>
+		<li class="lane2"><div class="sp gom"></div></li>
+		<li class="lane3"><div class="sp gom"></div></li>
+		</ul>
+	</div>
+
+	<div style="height:2000px"></div>
+	
+</div>
+<script src="../js/jquery-1.12.4.min.js"></script>
+<script>
+$(function(){
+	var polarBear = {
+		// 랜덤한 폴라베어가 선택되는 이벤트 실행시 randomChk : true
+		// randomChk : true, 
+		init : function(){
+			this.setElements();
+			this.setAnimate();
+			this.bindEvents();
+		},
+		setElements : function(){
+			this.wrap = $('.evt_wrap');
+			this.selectArea = this.wrap.find('.evt_area');
+			this.selectBearLst = this.selectArea.find('ul').children();
+			this.selectBear = this.selectBearLst.find('input[type="radio"]');
+
+			this.resultArea = this.wrap.find('.game_area');
+			this.resultBearLst = this.resultArea.find('li');
+			this.btn = this.selectArea.find('.btn');
+		},
+		setAnimate : function(){
+			this.bearDelay = 300;
+			this.bearDuration = 900;
+			this.bearEasing = 'linear';
+			this.scrollDelay = 200;
+			this.scrollSpeed = 400;
+		},
+		bindEvents : function(){
+			this.selectBear.on('change', $.proxy(this.onChangeBear, this));
+			this.btn.on('click', $.proxy(this.onClickFunc, this));
+		},
+		onChangeBear : function(e){
+			this.selectChk = true;
+			this.bearIdx = $(e.currentTarget).closest('li').index(); //closest 대신 parent도 가능
+		},
+		onClickFunc : function(){
+			if(!this.selectChk){
+				alert('폴라베어를 선택해주세요.');
+			}else if(this.joinChk){
+				alert('이미 참여하였습니다.');
+			}else if(this.randomChk){
+				this.randomBear();
+			}else{
+				this.moveBear();
+			}
+		},
+		moveBear : function(){
+			$('html, body').delay(this.scrollDelay).animate({ scrollTop : '300' }, this.scrollSpeed);
+			this.resultBearLst.eq(this.bearIdx).find('.gom').delay(this.bearDelay).animate({
+				top : '100px'
+			}, this.bearDuration, this.bearEasing, $.proxy(this.endEvents, this));
+		},
+		randomBear : function(){
+			this.randomIdx = Math.floor(Math.random() * this.resultBearLst.children().length);
+			if(this.randomIdx === this.bearIdx){ //while(this.randomIdx === this.bearIdx)
+				this.randomBear();
+			}else{
+				this.bearIdx = this.randomIdx;
+				this.moveBear();
+			}
+		},
+		endEvents : function(){
+			this.joinChk = true;
+			this.resultBearLst.eq(this.bearIdx).addClass('winlane');
+		}
+	}
+	polarBear.init();
+});
+</script>
+</body>
+</html>
