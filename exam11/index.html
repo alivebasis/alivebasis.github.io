@@ -63,12 +63,12 @@ p{margin-bottom:30px;padding-bottom:10px;border-bottom:2px solid #da0707;font-si
         <div class="box box2">
             <p>2. 라디오버튼</p>
             <span class="radio_box chk_active">
-                <input type="radio" id="radio1" name="radio1" class="ipt_rdo">
+                <input type="radio" id="radio1" name="radio" class="ipt_rdo">
                 <span class="rdo_box"></span>
                 <label for="radio1">라디오1</label>
             </span>
             <span class="radio_box">
-                <input type="radio" id="radio2" name="radio1" class="ipt_rdo">
+                <input type="radio" id="radio2" name="radio" class="ipt_rdo">
                 <span class="rdo_box"></span>
                 <label for="radio2">라디오2</label>
             </span>
@@ -98,7 +98,9 @@ p{margin-bottom:30px;padding-bottom:10px;border-bottom:2px solid #da0707;font-si
 <script src="js/apps/exam.js"></script>
 <script>
 $(function () {
-    var examForm = new exam.chkbox();
+    var chkbox = new exam.chkboxFunc();
+    var rdobox = new exam.rdoboxFunc();
+    var selbox = new exam.selboxFunc();
 });
 </script>
 </div>
