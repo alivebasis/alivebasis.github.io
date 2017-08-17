@@ -143,75 +143,143 @@ $(function(){
 	// Q4 [e]
 
 	// Q5 [s]
-	var examWrap5 = $('.exam_wrap').eq(4),
-		exam5 = examWrap5.find('.exam_q'),
-		btn5 = examWrap5.find('button');
-
-	var arr2 = [];
-	for(var i=0,imax=9; i<=imax; i++){
-		arr2.push(i);
+	var examObj5 = {
+		init : function () {
+			this.setElements();
+			this.initElements();
+			this.bindEvents();
+		},
+		setElements : function () {
+			this.examWrap = $('.exam_wrap').eq(4);
+			this.exam = this.examWrap.find('.exam_q');
+			this.btn = this.examWrap.find('button');
+		},
+		initElements : function () {
+			this.arr = [];
+		},
+		bindEvents : function () {
+			this.btn.on('click', $.proxy(this.onClickFunc, this));
+		},
+		onClickFunc : function () {
+			for(var i=0,imax=9; i<=imax; i++){
+				this.arr.push(i);
+			}
+			this.viewFunc();
+		},
+		viewFunc : function () {
+			this.exam.get(0).innerHTML = this.arr;
+		}
 	}
-	btn5.on('click',function(){
-		console.log('Q5 결과 ↓');
-		console.log(arr2);
-	});
+	examObj5.init();	
 	// Q5 [e]
 
 	// Q6 [s]
-	var examWrap6 = $('.exam_wrap').eq(5),
-		exam6 = examWrap6.find('.exam_q'),
-		btn6 = examWrap6.find('button');
-
-	var arr3 = [];
-	for(var i=0,imax=6; i<imax; i++){
-		arr3[i] = Math.round(Math.random() * 5);
+	var examObj6 = {
+		init : function () {
+			this.setElements();
+			this.initElements();
+			this.bindEvents();
+		},
+		setElements : function () {
+			this.examWrap = $('.exam_wrap').eq(5);
+			this.exam = this.examWrap.find('.exam_q');
+			this.btn = this.examWrap.find('button');
+		},
+		initElements : function () {
+			this.arr = [];
+		},
+		bindEvents : function () {
+			this.btn.on('click', $.proxy(this.onClickFunc, this));
+		},
+		onClickFunc : function () {
+			for(var i=0,imax=6; i<imax; i++){
+				this.arr[i] = Math.round(Math.random() * 5);
+			}
+			this.viewFunc();
+		},
+		viewFunc : function () {
+			this.exam.get(0).innerHTML = this.arr;
+		}
 	}
-	btn6.on('click',function(){
-		console.log('Q6 결과 ↓');
-		console.log(arr3);
-	});
+	examObj6.init();
 	// Q6 [e]
 
 	// Q7 [s]
-	var examWrap7 = $('.exam_wrap').eq(6),
-		exam7 = examWrap7.find('.exam_q'),
-		btn7 = examWrap7.find('button');
-
-	var arr4 = [], idx;
-	for(var i=0,imax=10; i<imax; i++){
-		arr4[i] = i;
-	}
-	console.log('Q7 문제 ↓');
-	console.log(arr4);
-	btn7.on('click',function(){
-		if(arr4.length > 0){ //배열 요소가 0개가 될때까지 반복
-			idx = Math.round(Math.random() * (arr4.length-1));
-			arr4.splice(idx, 1); //배열 길이에 해당하는 숫자 내에서, 랜덤한 숫자를 1개씩 삭제
-			console.log('index(' + idx + ') 요소삭제 => [' + arr4 + ']');
+	var examObj7 = {
+		init : function () {
+			this.setElements();
+			this.initElements();
+			this.bindEvents();
+		},
+		setElements : function () {
+			this.examWrap = $('.exam_wrap').eq(6);
+			this.exam = this.examWrap.find('.exam_q');
+			this.btn = this.examWrap.find('button');
+		},
+		initElements : function () {
+			this.arr = [];
+			for(var i=0,imax=10; i<imax; i++){
+				this.arr.push(i);
+			}
+		},
+		bindEvents : function () {
+			this.btn.on('click', $.proxy(this.onClickFunc, this));
+		},
+		onClickFunc : function () {
+			var idx;
+			if(this.arr.length){ //배열 요소가 0개가 될때까지 반복
+				idx = Math.round(Math.random() * (this.arr.length-1));
+				this.arr.splice(idx, 1); //배열 길이에 해당하는 숫자 내에서, 랜덤한 숫자를 1개씩 삭제
+			}
+			this.viewFunc();
+		},
+		viewFunc : function () {
+			this.exam.get(0).innerHTML = this.arr;
 		}
-	});
+	}
+	examObj7.init();
 	// Q7 [e]
 
 	// Q8 [s]
-	var examWrap8 = $('.exam_wrap').eq(7),
-		exam8 = examWrap8.find('.exam_q'),
-		btn8 = examWrap8.find('button');
-
-	var arr5 = [], ranVal;
-	btn8.on('click',function(){
-		for(var i=0; i<6; i++){
-			ranVal = Math.round(Math.random() * 5);
-			arr5[i] = ranVal;
-			for(var j=0; j<i; j++){
-				if(arr5[i] == arr5[j]){ //배열 간 중복값이 있다면
-					arr5.pop();	//중복 요소 제거
-					i--;	//제거된 요소에 값을 다시 채우기 위해 index 감소
+	var examObj8 = {
+		init : function () {
+			this.setElements();
+			this.initElements();
+			this.bindEvents();
+		},
+		setElements : function () {
+			this.examWrap = $('.exam_wrap').eq(7);
+			this.exam = this.examWrap.find('.exam_q');
+			this.btn = this.examWrap.find('button');
+		},
+		initElements : function () {
+			this.arr = [];
+			for(var i=0,imax=10; i<imax; i++){
+				this.arr.push(i);
+			}
+		},
+		bindEvents : function () {
+			this.btn.on('click', $.proxy(this.onClickFunc, this));
+		},
+		onClickFunc : function () {
+			var ramVal;
+			for(var i=0; i<6; i++){
+				ranVal = Math.round(Math.random() * 5);
+				this.arr[i] = ranVal;
+				for(var j=0; j<i; j++){
+					if(this.arr[i] === this.arr[j]){ //배열 간 중복값이 있다면
+						this.arr.pop();	//중복 요소 제거
+						i--;	//제거된 요소에 값을 다시 채우기 위해 index 감소
+					}
 				}
 			}
+			this.viewFunc();
+		},
+		viewFunc : function () {
+			this.exam.get(0).innerHTML = this.arr;
 		}
-		console.log('Q8 결과 ↓');
-		console.log(arr5);
-	});
+	}
+	examObj8.init();
 	// Q8 [e]
 });
 </script>
