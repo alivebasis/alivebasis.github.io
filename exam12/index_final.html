@@ -96,7 +96,10 @@ th,td{height:50px;text-align:center}
         onSortNumFunc : function () {
             var textArray = [],
                 basicArray = [];
+                console.log(this.tableBody.children());
             this.tableBody.children().filter(function () {
+                console.log(this);
+                console.log($(this));
                 var txt = parseInt($(this).find('td').eq(0).text());
                 textArray.push(txt);
                 basicArray.push(txt);
@@ -144,7 +147,6 @@ th,td{height:50px;text-align:center}
                 }
             }
             for (var key in layoutIndex) {
-                console.log(tableBodyChild.eq(layoutIndex[key]));
                 this.tableBody.children().last().after(tableBodyChild.eq(layoutIndex[key]));
             }
             // for (var key in layoutIndex) {
