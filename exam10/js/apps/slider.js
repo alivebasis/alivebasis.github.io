@@ -6,7 +6,7 @@
     var UTIL = win.examTab.common.util;
 
     // prototype 호출구문
-    win.examTab.changeFunc = function (container, args) {
+    win.examTab.changeFunc = function (type, args) {
         var defParams = {
             boxWrap : '.slide_box',
             contWrap : '.slide_cont',
@@ -14,7 +14,7 @@
             tabWrap : '.slide_tab',
             pagingWrap : '.slide_setting',
             btnArea : '.slide_btn',
-            type : 'slide', //fade or slide
+            type : type, //fade or slide
             speed : 400
         };
         this.opts = UTIL.def(defParams, (args || {}));
@@ -56,31 +56,37 @@
         onClickTab : function (e) {
             var target = $(e.currentTarget);
             this.currentIdx = target.closest('li').index();
-            if(this.oldIdx !== this.currentIdx){
-                this.onChangeTab();
+            if(this.oldIdx > this.currentIdx){
+                this.slideDirection = 'left';
+            }else{
+                this.slideDirection = 'right';
             }
-        },
-        onChangeTab : function () {
-            this.tab.closest('li').eq(this.oldIdx).removeClass('active');
-            this.tab.closest('li').eq(this.currentIdx).addClass('active');
             this.onChangeCont();
         },
         onChangeCont : function () {
-            if(this.opts.type === 'fade'){
+            if(this.oldIdx === this.currentIdx){
+                return;
+            }
+            this.tab.closest('li').eq(this.oldIdx).removeClass('active');
+            this.tab.closest('li').eq(this.currentIdx).addClass('active');
+            
+            if(this.opts.type === 'default'){
+                this.cont.eq(this.oldIdx).hide().removeClass('active');
+                this.cont.eq(this.currentIdx).show().addClass('active');
+            }else if(this.opts.type === 'fade'){
                 this.cont.eq(this.oldIdx).fadeOut(this.opts.speed).removeClass('active');
                 this.cont.eq(this.currentIdx).fadeIn(this.opts.speed).addClass('active');
             }else if(this.opts.type === 'slide'){
-                if(this.oldIdx > this.currentIdx){
-                    this.slideDirection = 'left';
-                }else{
-                    this.slideDirection = 'right';
-                }
                 if(this.slideDirection === 'left'){
-                    this.cont.eq(this.oldIdx).animate({ left : '100%' }, this.opts.speed);
-                    this.cont.eq(this.currentIdx).css({ left : '-100%' }).show().animate({ left : '0' }, this.opts.speed);
+                    this.cont.eq(this.oldIdx).animate({ left : '100%' }, this.opts.speed, function () {
+                        $(this).hide().css('left','')
+                    });
+                    this.cont.eq(this.currentIdx).css('left','-100%').show().animate({ left : 0 }, this.opts.speed);
                 }else if(this.slideDirection === 'right'){
-                    this.cont.eq(this.oldIdx).animate({ left : '-100%' }, this.opts.speed);
-                    this.cont.eq(this.currentIdx).css({ left : '90%' }).show().animate({ left : '0' }, this.opts.speed);
+                    this.cont.eq(this.oldIdx).animate({ left : '-100%' }, this.opts.speed, function () {
+                        $(this).hide().css('left','');
+                    });
+                    this.cont.eq(this.currentIdx).css('left','100%').show().animate({ left : 0 }, this.opts.speed);
                 }
             }
             this.oldIdx = this.currentIdx;
@@ -92,7 +98,7 @@
             if(this.currentIdx < 0){
                 this.currentIdx = this.tab.length - 1;
             }
-            this.onChangeTab();
+            this.onChangeCont();
         },
         onNextCont : function () {
             this.slideDirection = 'right';
@@ -100,7 +106,7 @@
             if(this.currentIdx >= this.tab.length){
                 this.currentIdx = 0;
             }
-            this.onChangeTab();
+            this.onChangeCont();
         }
         // onChangePageNum : function () {
         //     // console.log(this.targetIdx + "/" + this.currentIdx);
