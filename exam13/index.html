@@ -800,7 +800,7 @@ ins{text-decoration:none}
             this.topBtn.hide();
         },
         setOffset : function () {
-            this.startOffset = this.startObj.offset().top;
+            this.startOffset = this.startObj.outerHeight(true);
             this.endOffset = this.endObj.offset().top - $(win).height();
             console.log($(win).height());
         },
