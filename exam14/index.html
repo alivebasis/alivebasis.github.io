@@ -85,7 +85,7 @@ ins{text-decoration:none}
                 <strong class="blind">quick menu</strong>
                 <!-- anchor의 href값과 각 section의 id값을 일치시켜야함 -->
                 <ul class="quick_list">
-                <li><a href="#requirements" class="requirements active"><span class="sp">01 REQUIREMENTS</span></a></li>
+                <li><a href="#requirements" class="requirements"><span class="sp">01 REQUIREMENTS</span></a></li>
                 <li><a href="#benefits" class="benefits"><span class="sp">02 BENEFITS</span></a></li>
                 <li><a href="#apply" class="apply"><span class="sp">03 APPLY</span></a></li>
                 <li><a href="#" class="btn_top"><span class="sp">Go to top</span></a></li>
@@ -138,7 +138,6 @@ ins{text-decoration:none}
                 return true;
             });
             this.topBtn = this.quickListItem.find('.btn_top');
-            this.fixedTopPos = this.opts.fixedTopPos;
         },
         setOffset : function () {
             this.offsetArray = [];
@@ -146,10 +145,12 @@ ins{text-decoration:none}
                 var target = $(this.quickBtnList.eq(i).attr('href'));
                 this.offsetArray.push(target.offset().top);
             }
-            this.quickMenuOffset = this.quickMenu.offset().top - this.fixedTopPos;
+            console.log(this.offsetArray);
+            this.quickMenuOffset = this.quickMenu.offset().top - this.opts.fixedTopPos;
         },
         bildEvents : function () {
             this.quickBtnList.on('click', $.proxy(this.onClickFunc, this));
+            this.topBtn.on('click', $.proxy(this.onClickTopBtn, this));
             $(win).on('scroll', $.proxy(this.onScrollFunc, this));
         },
         onClickFunc : function (e) {
@@ -160,10 +161,44 @@ ins{text-decoration:none}
                 scrollTop : this.offsetArray[this.currentIdx]
             }, this.opts.scrollSpeed);
         },
+        onClickTopBtn : function (e) {
+            e.preventDefault();
+            $('html, body').stop().animate({
+                scrollTop : 0
+            }, this.opts.scrollSpeed);
+        },
         onScrollFunc : function () {
+            this.quickMenuFixed();
+            win.clearTimeout(this.scrollEndTimer);
+            this.scrollEndTimer = win.setTimeout($.proxy(this.scrollEndFunc, this), 150);
+        },
+        quickMenuFixed : function () {
             var winTop = $(win).scrollTop();
             if (winTop >= this.quickMenuOffset) {
-                this.quickMenu.addClass(this.opts.fixedClass).css('top', this.fixedTopPos);
+                if(!this.quickMenu.hasClass(this.opts.fixedClass)){
+                    this.quickMenu.addClass(this.opts.fixedClass).css('top', this.opts.fixedTopPos);
+                }
+            } else {
+                if(this.quickMenu.hasClass(this.opts.fixedClass)){
+                    this.quickMenu.removeClass(this.opts.fixedClass).css('top', '');
+                }
+            }
+        },
+        scrollEndFunc : function () {
+            var winTop = $(win).scrollTop();
+            for (var i = 0, imax = this.offsetArray.length; i < imax; i++) {
+                if (winTop >= this.offsetArray[i]) {
+                    this.currentIdx = i;
+                } else if (winTop < this.offsetArray[0]) {
+                    this.currentIdx = null;
+                }
+            }
+            this.quickMenuActive();
+        },
+        quickMenuActive : function () {
+            this.quickBtnList.removeClass(this.opts.activeClass);
+            if (this.currentIdx !== null) {
+                this.quickBtnList.eq(this.currentIdx).addClass(this.opts.activeClass);
             }
         }
     };
