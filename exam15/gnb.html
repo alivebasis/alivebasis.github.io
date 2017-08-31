@@ -119,7 +119,10 @@
             obj : container,
             listParent : '.menu',
             listContent : '.box',
-            breakPoint : 768,
+            breakPoint : {
+                pc : 1024,
+                tablet : 768
+            },
             openBtn : '#btn_gnbopen',
             closeBtn : '#btn_gnbclose',
             moMenu : '#gnb',
@@ -137,7 +140,7 @@
                 this.resizeEvent();
                 this.setEvents();
             } else {
-                this.setPcEvent(true);
+                this.setDesktopEvent(true);
             }
         },
         setElements : function () {
@@ -148,38 +151,72 @@
             this.closeBtn = this.obj.find(this.opts.closeBtn);
             this.moMenu = this.obj.find(this.opts.moMenu);
             this.moMenuWidth = this.moMenu.width();
+            this.breakPc = this.opts.breakPoint.pc;
+            this.breakTb = this.opts.breakPoint.tablet;
         },
         initLayout : function () {
-            this.setType = (UTIL.winSize().w > this.opts.breakPoint) ? 'pc' : 'mo';
+            this.isDesktop = false;
+            this.isTablet = false;
+            this.isMobile = false;
         },
         resizeEvent : function () {
             $(win).on('resize', $.proxy(this.setEvents, this));
         },
         setEvents : function () {
-            if (UTIL.winSize().w > this.opts.breakPoint) {
-                if (this.setType === 'pc') {
-                    this.setType = 'mo';
-                    this.setPcLayout();
-                    this.setPcEvent(true);
-                    this.setMoEvent(false);
-                }
-            } else {
-                if (this.setType === 'mo') {
-                    this.setType = 'pc';
-                    this.setMoLayout();
-                    this.setMoEvent(true);
-                    this.setPcEvent(false);
-                }
+            this.winSize = UTIL.winSize().w;
+            if (!this.isDesktop && this.winSize > this.breakPc) {
+                console.log('is pc')
+                this.isTablet = this.isMobile = false;
+                this.isDesktop = true;
+                this.setDesktopLayout();
+                this.setDesktopEvent(true);
+                this.setTabletEvent(false);
+                this.setMobileEvent(false);
+            }
+            if (!this.isTablet && this.winSize > this.breakTb && this.winSize < this.breakPc) {
+                console.log('is tablet')
+                this.isDesktop = this.isMobile = false;
+                this.isTablet = true;
+                this.setTabletLayout();
+                this.setDesktopEvent(false);
+                this.setTabletEvent(true);
+                this.setMobileEvent(false);
+            }
+            if (!this.isMobile && this.winSize < this.breakTb) {
+                console.log('is mobile');
+                this.isDesktop = this.isTablet = false;
+                this.isMobile = true;
+                this.setMobileLayout();
+                this.setDesktopEvent(false);
+                this.setTabletEvent(false);
+                this.setMobileEvent(true);
             }
         },
-        setPcEvent : function (type) {
+        setDesktopLayout : function () {
+            this.listContent.hide();
+        },
+        setTabletLayout : function () {
+            this.listContent.hide();
+        },
+        setMobileLayout : function () {
+            this.listContent.show();
+        },
+        setDesktopEvent : function (type) {
             if (type) {
-                this.listChild.on('mouseenter mouseleave focusin', $.proxy(this.setPcHover, this));
+                this.listChild.on('mouseenter mouseleave focusin', $.proxy(this.setDesktopHover, this));
             } else {
                 this.listChild.off('mouseenter mouseleave focusin');
             }
         },
-        setMoEvent : function (type) {
+        //tablet용 임시 이벤트
+        setTabletEvent : function (type) {
+            if (type) {
+                this.obj.css('background-color', 'yellow');
+            } else {
+                this.obj.css('background-color', 'transparent');
+            }
+        },
+        setMobileEvent : function (type) {
             if (type) {
                 this.openBtn.on('click', $.proxy(this.onOpenFunc, this));
                 this.closeBtn.on('click', $.proxy(this.onCloseFunc, this));
@@ -188,7 +225,7 @@
                 this.closeBtn.off('click');
             }
         },
-        setPcHover : function (e) {
+        setDesktopHover : function (e) {
             var target = $(e.currentTarget);
             if (e.type === 'mouseenter' || e.type === 'focusin') {
                 target.find(this.opts.listContent).show();
@@ -201,22 +238,29 @@
                 left : 0
             }, this.opts.moMenuSpeed);
             // this.moMenu.on('clickoutside', $.proxy(this.outsideFunc, this));
+            var outsideTimer = setTimeout($.proxy(this.outsideEvent, this), 30);
         },
         onCloseFunc : function () {
             this.moMenu.stop().animate({
                 left : - this.moMenuWidth
             }, this.opts.moMenuSpeed);
         },
-        setPcLayout : function () {
-            this.listContent.hide();
+        outsideEvent : function () {
+            this.moMenu.on('clickoutside', $.proxy(this.outsideFunc, this));
         },
-        setMoLayout : function () {
-            this.listContent.show();
+        outsideFunc : function () {
+            this.onCloseFunc();
+            this.moMenu.off('clickoutside');
         }
     }
 
     $(function () {
-        win.homeNavigation = new win.exam.gnb('#header');
+        win.homeNavigation = new win.exam.gnb('#header', {
+            breakPoint : {
+                pc : 1024,
+                tablet : 768
+            }
+        });
     });
 })(window, window.jQuery);
 </script>
